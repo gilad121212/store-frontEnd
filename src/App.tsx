@@ -3,7 +3,7 @@
 
 function App() {
  return (
-  <div>store of gilad</div>
+  <div>store of gilad king</div>
  )
 }
 
