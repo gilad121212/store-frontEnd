@@ -11,13 +11,14 @@ import { useNavigate } from 'react-router-dom';
 type props = {
     img:string,
     name:string
+    id:string
 }
 export default function ActionAreaCard(props:props) {
     const navigate = useNavigate()
 
   return (
     <Box>
-    <Card  sx={{ maxWidth: 100, borderRadius: 50}}>
+    <Card sx={{ maxWidth: 100, borderRadius: 50}}>
       <CardActionArea  onClick={() => navigate(`/Products/${props.name}`)}>
         <CardMedia
           component="img"

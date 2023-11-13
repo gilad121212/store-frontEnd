@@ -3,8 +3,7 @@ import React, { createContext, useState, useEffect } from "react";
 type category = {
   img: string;
   category_name: string;
-  id:string
- 
+  category_id:string
 };
 interface UserContextProviderProps {
   children: React.ReactNode;
@@ -21,7 +20,7 @@ export function CategoryData(props: UserContextProviderProps) {
   const [category, setCategory] = useState<category[] | null>(null);
   useEffect(() => {
     const data = async () => {
-      let data = await fetch("http://localhost:3009/products/");
+      let data = await fetch("https://store-zrxd.onrender.com/products/");
       let jdata = await data.json();
       setCategory(jdata);
     };

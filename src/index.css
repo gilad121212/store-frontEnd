@@ -1,0 +1,13 @@
+html, body {
+    margin: 0;
+    padding: 0;
+    height: 100%;
+  }
+
+.page{
+    display: flex;
+    justify-content: space-around;
+    margin-left: 30px;
+    margin-right: 30px;
+    margin-top: 10px;
+}
