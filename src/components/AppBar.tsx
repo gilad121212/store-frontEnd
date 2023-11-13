@@ -13,7 +13,8 @@ import Tooltip from "@mui/material/Tooltip";
 import MenuItem from "@mui/material/MenuItem";
 import AdbIcon from "@mui/icons-material/Adb";
 import { Outlet } from "react-router-dom";
-import { SimpleDialog } from "./signUpDialog";
+import SignUp from "./signUpDialog";
+import SignIn from "./signInDialog";
 
 const pages = ["Home page", "Shopping Cart", "xxxxxx"];
 
@@ -24,15 +25,25 @@ function ResponsiveAppBar() {
   const [anchorElUser, setAnchorElUser] = React.useState<null | HTMLElement>(
     null
   );
-  const [open, setOpen] = React.useState(false);
-  const [selectedValue, setSelectedValue] = React.useState("");
+
+  const [openSignUp, setOpenSignUp] = React.useState(false);
+  const [selectedValueSignUp, setSelectedValueSignUp] = React.useState("");
+  const [openSignIn, setOpenSignIn] = React.useState(false);
+  const [selectedValueSignIn, setSelectedValueSignIn] = React.useState("");
 
   const handleClickOpenSignUpDialog = () => {
-    setOpen(true);
+    setOpenSignUp(true);
   };
-  const handleClose = (value: string) => {
-    setOpen(false);
-    setSelectedValue(value);
+  const handleCloseSignUp = (value: string) => {
+    setOpenSignUp(false);
+    setSelectedValueSignUp(value);
+  };
+  const handleClickOpenSignInDialog = () => {
+    setOpenSignIn(true);
+  };
+  const handleCloseSignIn = (value: string) => {
+    setOpenSignIn(false);
+    setSelectedValueSignIn(value);
   };
 
   const handleOpenNavMenu = (event: React.MouseEvent<HTMLElement>) => {
@@ -164,13 +175,26 @@ function ResponsiveAppBar() {
                 onClose={handleCloseUserMenu}
               >
                 <MenuItem key={"sign up"} onClick={handleClickOpenSignUpDialog}>
-                  <Typography textAlign="center">{"sign up"}</Typography>
+                  <Typography textAlign="center">{"Sign up"}</Typography>
                 </MenuItem>
-                <SimpleDialog
-                  selectedValue={selectedValue}
-                  open={open}
-                  onClose={handleClose}
+                <SignUp
+                  selectedValue={selectedValueSignUp}
+                  open={openSignUp}
+                  onClose={handleCloseSignUp}
+                  handleClickOpenSignIn={handleClickOpenSignInDialog}
                 />
+                <MenuItem key={"sign in"} onClick={handleClickOpenSignInDialog}>
+                  <Typography textAlign="center">{"Sign in"}</Typography>
+                </MenuItem>
+                <SignIn
+                  selectedValue={selectedValueSignIn}
+                  open={openSignIn}
+                  onClose={handleCloseSignIn}
+                  handleClickOpenSignUp={handleClickOpenSignUpDialog}
+                />
+                <MenuItem key={"Log out"}>
+                  <Typography textAlign="center">{"Log out"}</Typography>
+                </MenuItem>
               </Menu>
             </Box>
           </Toolbar>

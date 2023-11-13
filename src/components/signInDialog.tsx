@@ -12,18 +12,18 @@ import Container from "@mui/material/Container";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
 import "./signInDialog.css";
 
-export interface SimpleDialogProps {
+export interface SignInDialogProps {
   open: boolean;
   selectedValue: string;
   onClose: (value: string) => void;
-  handleClickOpenSignIn: () => void;
+  handleClickOpenSignUp: () => void;
 }
 
-export default function SignUp(props: SimpleDialogProps) {
-  const { onClose, selectedValue, open } = props;
+export default function SignIn(props: SignInDialogProps) {
+  const { onClose, open } = props;
 
   const handleClose = () => {
-    onClose(selectedValue);
+    onClose("");
   };
 
   const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
@@ -37,9 +37,9 @@ export default function SignUp(props: SimpleDialogProps) {
 
   const defaultTheme = createTheme();
 
-  const handleClickSignIn = () => {
+  const handleClickSignUp = () => {
     handleClose();
-    props.handleClickOpenSignIn();
+    props.handleClickOpenSignUp();
   };
 
   return (
@@ -59,71 +59,48 @@ export default function SignUp(props: SimpleDialogProps) {
               <LockOutlinedIcon />
             </Avatar>
             <Typography component="h1" variant="h5">
-              Sign up
+              Sign in
             </Typography>
             <Box
               component="form"
-              noValidate
               onSubmit={handleSubmit}
-              sx={{ mt: 3 }}
+              noValidate
+              sx={{ mt: 1 }}
             >
-              <Grid container spacing={2}>
-                <Grid item xs={12} sm={6}>
-                  <TextField
-                    autoComplete="given-name"
-                    name="firstName"
-                    required
-                    fullWidth
-                    id="firstName"
-                    label="First Name"
-                    autoFocus
-                  />
-                </Grid>
-                <Grid item xs={12} sm={6}>
-                  <TextField
-                    required
-                    fullWidth
-                    id="lastName"
-                    label="Last Name"
-                    name="lastName"
-                    autoComplete="family-name"
-                  />
-                </Grid>
-                <Grid item xs={12}>
-                  <TextField
-                    required
-                    fullWidth
-                    id="email"
-                    label="Email Address"
-                    name="email"
-                    autoComplete="email"
-                  />
-                </Grid>
-                <Grid item xs={12}>
-                  <TextField
-                    required
-                    fullWidth
-                    name="password"
-                    label="Password"
-                    type="password"
-                    id="password"
-                    autoComplete="new-password"
-                  />
-                </Grid>
-                <Grid item xs={12}></Grid>
-              </Grid>
+              <TextField
+                margin="normal"
+                required
+                fullWidth
+                id="email"
+                label="Email Address"
+                name="email"
+                autoComplete="email"
+                autoFocus
+              />
+              <TextField
+                margin="normal"
+                required
+                fullWidth
+                name="password"
+                label="Password"
+                type="password"
+                id="password"
+                autoComplete="current-password"
+              />
+
               <Button
                 type="submit"
                 fullWidth
                 variant="contained"
                 sx={{ mt: 3, mb: 2 }}
               >
-                Sign Up
+                Sign In
               </Button>
-              <Grid container justifyContent="flex-end">
+              <Grid container>
+                <Grid item xs></Grid>
                 <Grid item>
-                  <p id="BeyondSign" onClick={handleClickSignIn}>
-                    {"Already have an account? Sign in"}
+                  <p id="BeyondSign" onClick={handleClickSignUp}>
+                    {"Don't have an account? Sign Up"}
                   </p>
                 </Grid>
               </Grid>
