@@ -1,5 +1,6 @@
-export default function homePage(){
+import ResponsiveAppBar from "./AppBar"
+export default function HomePage(){
     return(
-        <div></div>
+        <ResponsiveAppBar />
     )
 }
