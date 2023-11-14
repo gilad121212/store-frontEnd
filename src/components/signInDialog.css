@@ -1,11 +1,9 @@
 #BeyondSign {
-    color:#1976d2;
-    text-decoration: underline;
-    text-decoration-color: #92c3f4;
-    font-size: 14px;
+  color: #1976d2;
+  text-decoration: underline;
+  text-decoration-color: rgba(25, 118, 210, 0.4);
 }
 #BeyondSign:hover {
-    text-decoration-color: #1976d2;
-    cursor: pointer;
-
+  text-decoration-color: #1976d2;
+  cursor: pointer;
 }

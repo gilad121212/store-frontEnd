@@ -1,8 +1,6 @@
-import ResponsiveAppBar from "./AppBar"
 import RecipeReviewCard from "./categoryCards"
-import React, { useContext } from 'react';
+import { useContext } from 'react';
 import { UserContext } from "../Context/CategoryContext";
-import Button from '@mui/material/Button';
 
 
 export default function HomePage(){

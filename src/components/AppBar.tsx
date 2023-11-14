@@ -15,8 +15,10 @@ import AdbIcon from "@mui/icons-material/Adb";
 import { Outlet } from "react-router-dom";
 import SignUp from "./signUpDialog";
 import SignIn from "./signInDialog";
-
-const pages = ["Home page", "Shopping Cart", "xxxxxx"];
+import Badge, { BadgeProps } from "@mui/material/Badge";
+import { styled } from "@mui/material/styles";
+import ShoppingCartIcon from "@mui/icons-material/ShoppingCart";
+const pages = ["Home page", "Shopping Cart"];
 
 function ResponsiveAppBar() {
   const [anchorElNav, setAnchorElNav] = React.useState<null | HTMLElement>(
@@ -60,6 +62,15 @@ function ResponsiveAppBar() {
   const handleCloseUserMenu = () => {
     setAnchorElUser(null);
   };
+
+  const StyledBadge = styled(Badge)<BadgeProps>(({ theme }) => ({
+    "& .MuiBadge-badge": {
+      right: -3,
+      top: 13,
+      border: `2px solid ${theme.palette.background.paper}`,
+      padding: "0 4px",
+    },
+  }));
 
   return (
     <div>
@@ -116,7 +127,7 @@ function ResponsiveAppBar() {
               >
                 {pages.map((page) => (
                   <MenuItem key={page} onClick={handleCloseNavMenu}>
-                    <Typography textAlign="center">{page}</Typography>
+                    <Typography textAlign="left">{page}</Typography>
                   </MenuItem>
                 ))}
               </Menu>
@@ -150,6 +161,13 @@ function ResponsiveAppBar() {
                   {page}
                 </Button>
               ))}
+              <Button>
+                <IconButton aria-label="cart">
+                  <StyledBadge badgeContent={5} color="warning">
+                    <ShoppingCartIcon />
+                  </StyledBadge>
+                </IconButton>
+              </Button>
             </Box>
 
             <Box sx={{ flexGrow: 0 }}>
