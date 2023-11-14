@@ -11,6 +11,7 @@ import Typography from "@mui/material/Typography";
 import Container from "@mui/material/Container";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
 import "./signInDialog.css";
+import { useState } from "react";
 
 export interface SimpleDialogProps {
   open: boolean;
@@ -18,8 +19,20 @@ export interface SimpleDialogProps {
   onClose: (value: string) => void;
   handleClickOpenSignIn: () => void;
 }
+interface User {
+  email: string;
+  firstName: string;
+  lastName: string;
+  password: string;
+}
 
 export default function SignUp(props: SimpleDialogProps) {
+  const [user, setUser] = useState<User>({
+    email: "",
+    firstName: "",
+    lastName: "",
+    password: "",
+  });
   const { onClose, selectedValue, open } = props;
 
   const handleClose = () => {
@@ -29,9 +42,22 @@ export default function SignUp(props: SimpleDialogProps) {
   const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     const data = new FormData(event.currentTarget);
-    console.log({
-      email: data.get("email"),
-      password: data.get("password"),
+    if (!user?.email) return;
+    fetch("https://store-zrxd.onrender.com/users/signUp", {
+      method: "POST",
+      body: JSON.stringify(user),
+      headers: {
+        "Content-Type": "application/json",
+      },
+    });
+    handleClose();
+    console.log(user);
+    
+    setUser({
+      email: "",
+      firstName: "",
+      lastName: "",
+      password: "",
     });
   };
 
@@ -77,6 +103,10 @@ export default function SignUp(props: SimpleDialogProps) {
                     id="firstName"
                     label="First Name"
                     autoFocus
+                    value={user?.firstName}
+                    onChange={(e) =>
+                      setUser({ ...user, ["firstName"]: e.target.value })
+                    }
                   />
                 </Grid>
                 <Grid item xs={12} sm={6}>
@@ -87,6 +117,10 @@ export default function SignUp(props: SimpleDialogProps) {
                     label="Last Name"
                     name="lastName"
                     autoComplete="family-name"
+                    value={user?.lastName}
+                    onChange={(e) =>
+                      setUser({ ...user, ["lastName"]: e.target.value })
+                    }
                   />
                 </Grid>
                 <Grid item xs={12}>
@@ -97,6 +131,10 @@ export default function SignUp(props: SimpleDialogProps) {
                     label="Email Address"
                     name="email"
                     autoComplete="email"
+                    value={user?.email}
+                    onChange={(e) =>
+                      setUser({ ...user, ["email"]: e.target.value })
+                    }
                   />
                 </Grid>
                 <Grid item xs={12}>
@@ -108,6 +146,10 @@ export default function SignUp(props: SimpleDialogProps) {
                     type="password"
                     id="password"
                     autoComplete="new-password"
+                    value={user?.password}
+                    onChange={(e) =>
+                      setUser({ ...user, ["password"]: e.target.value })
+                    }
                   />
                 </Grid>
                 <Grid item xs={12}></Grid>

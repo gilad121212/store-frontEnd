@@ -1,9 +1,9 @@
-import ResponsiveAppBar from "./AppBar"
+import ResponsiveAppBar from "./AppBar";
 
-export default function Header(){
-    return(
-       <div>
-         <ResponsiveAppBar />
-       </div>
-    )
+export default function Header() {
+  return (
+    <div>
+      <ResponsiveAppBar />
+    </div>
+  );
 }
