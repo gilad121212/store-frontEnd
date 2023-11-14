@@ -1,6 +1,7 @@
 import RecipeReviewCard from "./categoryCards"
 import { useContext } from 'react';
 import { UserContext } from "../Context/CategoryContext";
+import Box from "@mui/material/Box";
 
 
 export default function HomePage(){
@@ -9,9 +10,11 @@ if (!context) return null;
 const {category, setCategory } = context
 
     return(
-       <div>
+       <Box sx={{display:"flex" , justifyContent:"center", alignItems:"center" , marginTop:"100px"}}>
          
-         {category?.map((arr)=> (<RecipeReviewCard img={arr.img} name={arr.category_name} ></RecipeReviewCard>) )}
-       </div>
-    )
+         {category?.map((arr)=> (<RecipeReviewCard id={arr.category_id} img={arr.img} name={arr.category_name} ></RecipeReviewCard>) )}
+         </Box>
+
+       
+       )
 }
