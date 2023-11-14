@@ -12,6 +12,8 @@ import Container from "@mui/material/Container";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
 import "./signInDialog.css";
 import { useState } from "react";
+import { AuthContext } from "../Context/AuthContext";
+import { json } from "react-router-dom";
 
 export interface SimpleDialogProps {
   open: boolean;
@@ -27,6 +29,9 @@ interface User {
 }
 
 export default function SignUp(props: SimpleDialogProps) {
+  const authContext = React.useContext(AuthContext);
+  const isAuthenticated = authContext?.isAuthenticated;
+  const setIsAuthenticated = authContext?.setIsAuthenticated;
   const [user, setUser] = useState<User>({
     email: "",
     firstName: "",
@@ -43,16 +48,32 @@ export default function SignUp(props: SimpleDialogProps) {
     event.preventDefault();
     const data = new FormData(event.currentTarget);
     if (!user?.email) return;
-    fetch("https://store-zrxd.onrender.com/users/signUp", {
+    fetch("http://127.0.0.1:3000/users/signUp", {
       method: "POST",
       body: JSON.stringify(user),
       headers: {
         "Content-Type": "application/json",
       },
-    });
+    })
+      .then(async (res) => {
+        if (!res.ok) {
+          const errorText = await res.text();
+          throw new Error(
+            `HTTP error! Status: ${res.status}, Error: ${errorText}`
+          );
+        }
+        return res.text();
+      })
+      .then((data) => {
+        const userObject = { email: user.email, token: data };
+        localStorage.setItem("user", JSON.stringify(userObject)),
+          setIsAuthenticated ? userObject : null;
+      })
+      .catch((error) => console.error("Error:", error));
+
     handleClose();
     console.log(user);
-    
+
     setUser({
       email: "",
       firstName: "",
