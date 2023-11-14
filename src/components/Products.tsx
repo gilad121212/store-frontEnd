@@ -1,6 +1,6 @@
 import { useParams } from "react-router-dom";
 import React, { createContext, useState, useEffect } from "react";
-import CardsProdact from "./prodactCard";
+import CardsProdact from "./prodactsCard";
 import Box from "@mui/material/Box";
 
 type ContactsParams = {

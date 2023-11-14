@@ -1,5 +1,7 @@
 import { useParams } from "react-router-dom";
 import React, { createContext, useState, useEffect } from "react";
+import RecipeReviewCard from "./mainCard";
+const URL = process.env.url
 
 type cards = {
     _id: string;
@@ -23,19 +25,20 @@ type cards = {
 
 export default function Product(){
     const [dataCard, setDataCard] = useState<cards[] | null>(null);
-//   useEffect(() => {
-//     const data = async () => {
-//       const data = await fetch(
-//         `http://localhost:3009/products/product/${params.id}`
-//       );
-//       const dataj = await data.json();
-//       console.log(dataj);
-//       setDataCard(dataj);
-//     };
-//     data();
-//   }, []);
+  useEffect(() => {
+    const data = async () => {
+      const data = await fetch(
+        `${URL}products/product/${params.id}`
+      );
+      const dataj = await data.json();
+      console.log(dataj);
+      setDataCard(dataj);
+    };
+    data();
+  }, []);
     const params = useParams();
+    if(dataCard)
     return(
-        <div>{dataCard?.map((arr)=>(<div>{arr.title}</div>))}</div>
+        <RecipeReviewCard></RecipeReviewCard>
     )
 }

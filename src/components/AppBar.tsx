@@ -15,7 +15,6 @@ import AdbIcon from "@mui/icons-material/Adb";
 import { Outlet } from "react-router-dom";
 import SignUp from "./signUpDialog";
 import SignIn from "./signInDialog";
-import { useNavigate } from 'react-router-dom';
 
 const pages = ["Home page", "Shopping Cart", "xxxxxx"];
 
@@ -61,8 +60,6 @@ function ResponsiveAppBar() {
   const handleCloseUserMenu = () => {
     setAnchorElUser(null);
   };
-
-  const navigate = useNavigate()
 
   return (
     <div>
@@ -144,14 +141,15 @@ function ResponsiveAppBar() {
               LOGO
             </Typography>
             <Box sx={{ flexGrow: 1, display: { xs: "none", md: "flex" } }}>
-             
+              {pages.map((page) => (
                 <Button
-                  key="home page"
-                  onClick={()=> navigate("/")}
+                  key={page}
+                  onClick={handleCloseNavMenu}
                   sx={{ my: 2, color: "white", display: "block" }}
                 >
-                  home page
+                  {page}
                 </Button>
+              ))}
             </Box>
 
             <Box sx={{ flexGrow: 0 }}>
