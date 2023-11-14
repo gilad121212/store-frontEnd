@@ -3,16 +3,14 @@ import React, { createContext, useState, useEffect } from "react";
 type category = {
   img: string;
   category_name: string;
-  id:string
- 
+  category_id: string;
 };
 interface UserContextProviderProps {
   children: React.ReactNode;
 }
 interface UserContextType {
-    category: category[] | null;
-    setCategory: React.Dispatch<React.SetStateAction<category[] | null>>;
-
+  category: category[] | null;
+  setCategory: React.Dispatch<React.SetStateAction<category[] | null>>;
 }
 
 export const UserContext = createContext<UserContextType | null>(null);
@@ -33,18 +31,3 @@ export function CategoryData(props: UserContextProviderProps) {
     </UserContext.Provider>
   );
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
