@@ -19,7 +19,7 @@ export default function ActionAreaCard(props:props) {
   return (
     <Box sx={{margin:"50px"}}>
     <Card  sx={{ maxWidth: 100, borderRadius: 50 }}>
-      <CardActionArea  onClick={() => navigate(`/Products/${props.name}`)}>
+      <CardActionArea  onClick={() => navigate(`/Products/${props.id}`)}>
         <CardMedia
           component="img"
           height="100"

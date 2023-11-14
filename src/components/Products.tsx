@@ -32,7 +32,7 @@ export default function Products() {
   const [dataCard, setDataCard] = useState<cards[] | null>(null);
   useEffect(() => {
     const data = async () => {
-      const data = await fetch(`http://localhost:3009/products/all/4`);
+      const data = await fetch(`http://localhost:3000/products/all/${params.name}`);
       const dataj = await data.json();
       setDataCard(dataj);
       console.log(dataj)

@@ -19,7 +19,7 @@ export function CategoryData(props: UserContextProviderProps) {
   const [category, setCategory] = useState<category[] | null>(null);
   useEffect(() => {
     const data = async () => {
-      let data = await fetch("http://localhost:3009/products/");
+      let data = await fetch("http://localhost:3000/products/");
       let jdata = await data.json();
       setCategory(jdata);
     };
