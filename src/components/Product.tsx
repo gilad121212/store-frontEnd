@@ -1,7 +1,7 @@
 import { useParams } from "react-router-dom";
 import React, { createContext, useState, useEffect } from "react";
 import RecipeReviewCard from "./mainCard";
-const URL = process.env.url
+// const URL = process.env.url
 
 type cards = {
     _id: string;
