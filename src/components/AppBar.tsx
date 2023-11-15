@@ -17,12 +17,16 @@ import SignUp from "./signUpDialog";
 import SignIn from "./signInDialog";
 import Badge, { BadgeProps } from "@mui/material/Badge";
 import { styled } from "@mui/material/styles";
-import ShoppingCartIcon from "@mui/icons-material/ShoppingCart";
+import { useContext } from "react";
 import ShoppingCart from "./shoppingCart";
+import { AuthContext } from "../Context/AuthContext";
 
 const pages = ["Home page", "Shopping Cart"];
 
 function ResponsiveAppBar() {
+  const authContext = useContext(AuthContext);
+  const cartItems = authContext?.isAuthenticated;
+  
   const [anchorElNav, setAnchorElNav] = React.useState<null | HTMLElement>(
     null
   );
@@ -97,7 +101,6 @@ function ResponsiveAppBar() {
             >
               LOGO
             </Typography>
-
             <Box sx={{ flexGrow: 1, display: { xs: "flex", md: "none" } }}>
               <IconButton
                 size="large"
@@ -169,8 +172,6 @@ function ResponsiveAppBar() {
                 </IconButton>
               </Button>
             </Box>
-
-
             <Box sx={{ flexGrow: 0 }}>
               <Tooltip title="Open settings">
                 <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>

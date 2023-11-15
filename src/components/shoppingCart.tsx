@@ -9,7 +9,6 @@ import {
   ListItem,
   ListItemText,
   Divider,
-  Button,
   TextField,
   Card,
   CardContent,
@@ -20,12 +19,13 @@ import DeleteIcon from "@mui/icons-material/Delete";
 import "./shoppingCart.css";
 import { ShopingCartContext } from "../Context/ShopingCartContext";
 import { AuthContext } from "../Context/AuthContext";
+import Checkout from "./PayPal/PayPal";
 
 export interface CartItem {
   id: number;
   name: string;
   price: number;
-  title:string
+  title: string;
   quantity: number;
   images: string[];
   description: string;
@@ -85,7 +85,7 @@ export default function ShoppingCart() {
   }, []);
 
   useEffect(() => {
-    if (cartItems && cartItems.length > 0) {
+    if (cartItems) {
       if (isAuthenticated) {
         handlePostDB();
       } else {
@@ -114,7 +114,7 @@ export default function ShoppingCart() {
     handlePostDB();
   };
   const handleClearCart = () => {
-    setCartItems([]);
+    setCartItems(() => []);
   };
   const total = cartItems?.reduce(
     (acc, item) => acc + item.price * item.quantity,
@@ -124,14 +124,15 @@ export default function ShoppingCart() {
   const handlePostDB = () => {
     const userString = localStorage.getItem("user");
     const user: User | null = userString ? JSON.parse(userString) : null;
-    if (user) {
-    }
     const myHeaders = new Headers();
     myHeaders.append("Content-Type", "application/json");
     const raw = JSON.stringify({
       products: cartItems,
       user_id: user?.id,
     });
+    if (!user) {
+      return;
+    }
     const requestOptions: RequestInit = {
       method: "POST",
       headers: myHeaders,
@@ -161,8 +162,11 @@ export default function ShoppingCart() {
             <ShoppingCartIcon />
           </Badge>
         </IconButton>
-        <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
-        </Typography>
+        <Typography
+          variant="h6"
+          component="div"
+          sx={{ flexGrow: 1 }}
+        ></Typography>
       </Toolbar>
       <Drawer anchor="right" open={isDrawerOpen} onClose={handleDrawerClose}>
         <div>
@@ -240,12 +244,12 @@ export default function ShoppingCart() {
           </List>
           <Divider />
           <Toolbar sx={{ zIndex: "tooltip" }}>
-            <Button variant="contained" color="primary">
-              pay
-            </Button>
             <List>
               <ListItem>
+                <div>
                 <ListItemText primary={`Total: ₪${total}`} />
+                  <Checkout amount={total} />
+                </div>
               </ListItem>
             </List>
           </Toolbar>
