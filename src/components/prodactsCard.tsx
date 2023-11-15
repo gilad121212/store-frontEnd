@@ -10,6 +10,7 @@ type props = {
   id: number;
   img: string;
   title: string;
+  price: number;
 };
 
 export default function CardsProdact(props: props) {
@@ -23,6 +24,9 @@ export default function CardsProdact(props: props) {
         </Typography>
         <Typography variant="body2" color="text.secondary">
           {props.title}
+        </Typography>
+        <Typography variant="body2" color="text.secondary">
+          {props.price}
         </Typography>
       </CardContent>
       <CardActions>
