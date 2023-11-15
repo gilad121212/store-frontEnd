@@ -165,12 +165,9 @@ function ResponsiveAppBar() {
               ))}
               <Button>
                 <IconButton aria-label="cart">
-                  <StyledBadge badgeContent={5} color="warning">
-                    <ShoppingCartIcon />
-                  </StyledBadge>
+                  <ShoppingCart/>
                 </IconButton>
               </Button>
-              <ShoppingCart></ShoppingCart>
             </Box>
 
 

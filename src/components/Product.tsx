@@ -38,14 +38,6 @@ export default function Product() {
   const params = useParams();
   if (dataCard)
     return (
-      <ImgMediaCard
-        description={dataCard.data.description}
-        key={dataCard.data.id}
-        price={dataCard.data.price}
-        img={dataCard.data.images[0]}
-        titel={dataCard.data.title}
-      >
-        {" "}
-      </ImgMediaCard>
+      <ImgMediaCard/>
     );
 }

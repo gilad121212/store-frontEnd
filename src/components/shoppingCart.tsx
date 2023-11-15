@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect, useState, useContext } from "react";
 import {
   Toolbar,
   IconButton,
@@ -18,11 +18,14 @@ import {
 import ShoppingCartIcon from "@mui/icons-material/ShoppingCart";
 import DeleteIcon from "@mui/icons-material/Delete";
 import "./shoppingCart.css";
+import { ShopingCartContext } from "../Context/ShopingCartContext";
+import { AuthContext } from "../Context/AuthContext";
 
-interface CartItem {
+export interface CartItem {
   id: number;
   name: string;
   price: number;
+  title:string
   quantity: number;
   images: string[];
   description: string;
@@ -35,7 +38,16 @@ interface User {
 
 export default function ShoppingCart() {
   const [isDrawerOpen, setDrawerOpen] = useState(false);
-  const [cartItems, setCartItems] = useState<CartItem[] | null>(null);
+
+  const CartContext = useContext(ShopingCartContext);
+  const cartItems = CartContext?.shopingCart;
+  const setCartItems = CartContext?.setShopingCart;
+
+  const authContext = useContext(AuthContext);
+  const isAuthenticated = authContext?.isAuthenticated;
+  if (!setCartItems) {
+    return;
+  }
 
   useEffect(() => {
     const userString = localStorage.getItem("user");
@@ -55,6 +67,7 @@ export default function ShoppingCart() {
     if (!user) {
       return;
     }
+    localStorage.removeItem("cart");
     fetch(`http://127.0.0.1:3009/products/getCart`, requestOptions)
       .then(async (res) => {
         if (!res.ok) {
@@ -70,9 +83,15 @@ export default function ShoppingCart() {
       })
       .catch((error) => console.log("error", error));
   }, []);
+
   useEffect(() => {
-    if (!cartItems) return;
-    handlePostDB();
+    if (cartItems && cartItems.length > 0) {
+      if (isAuthenticated) {
+        handlePostDB();
+      } else {
+        localStorage.setItem("cart", JSON.stringify(cartItems));
+      }
+    }
   }, [cartItems]);
 
   const handleDrawerOpen = () => {
@@ -92,6 +111,7 @@ export default function ShoppingCart() {
     setCartItems((prevItems) =>
       (prevItems ?? []).filter((item) => item.id !== itemId)
     );
+    handlePostDB();
   };
   const handleClearCart = () => {
     setCartItems([]);
@@ -102,24 +122,35 @@ export default function ShoppingCart() {
   );
 
   const handlePostDB = () => {
+    const userString = localStorage.getItem("user");
+    const user: User | null = userString ? JSON.parse(userString) : null;
+    if (user) {
+    }
     const myHeaders = new Headers();
     myHeaders.append("Content-Type", "application/json");
-
     const raw = JSON.stringify({
-      user_id: "6551ecae1026f74928c28106",
       products: cartItems,
+      user_id: user?.id,
     });
-
     const requestOptions: RequestInit = {
       method: "POST",
       headers: myHeaders,
       body: raw,
       redirect: "follow" as RequestRedirect,
     };
-
     fetch("http://127.0.0.1:3009/products/editCart", requestOptions)
-      .then((response) => response.text())
-      .then((result) => console.log(result))
+      .then(async (res) => {
+        if (!res.ok) {
+          const errorText = await res.text();
+          throw new Error(
+            `HTTP error! Status: ${res.status}, Error: ${errorText}`
+          );
+        }
+        return res.json();
+      })
+      .then((result) => {
+        console.log(result);
+      })
       .catch((error) => console.log("error", error));
   };
   return (
@@ -131,7 +162,6 @@ export default function ShoppingCart() {
           </Badge>
         </IconButton>
         <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
-          SHOPPING CART
         </Typography>
       </Toolbar>
       <Drawer anchor="right" open={isDrawerOpen} onClose={handleDrawerClose}>
@@ -159,7 +189,9 @@ export default function ShoppingCart() {
               </List>
               <Divider />
             </div>
-          ) : (<p>empty cart</p>)}
+          ) : (
+            <p>empty cart</p>
+          )}
 
           <List>
             {cartItems &&

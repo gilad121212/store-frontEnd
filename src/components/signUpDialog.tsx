@@ -46,7 +46,6 @@ export default function SignUp(props: SimpleDialogProps) {
 
   const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
-    const data = new FormData(event.currentTarget);
     if (!user?.email) return;
     fetch("http://127.0.0.1:3009/users/signUp", {
       method: "POST",
@@ -71,7 +70,8 @@ export default function SignUp(props: SimpleDialogProps) {
           id: data.id,
         };
         localStorage.setItem("user", JSON.stringify(userObject)),
-          setIsAuthenticated ? userObject : null;
+        console.log(userObject);
+        setIsAuthenticated ? userObject : null;
       })
       .catch((error) => console.error("Error:", error));
 
