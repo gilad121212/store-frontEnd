@@ -20,10 +20,10 @@ export default function CardsProdact(props: props) {
       <CardMedia sx={{ height: 140 }} image={props.img} title="green iguana" />
       <CardContent>
         <Typography gutterBottom variant="h5" component="div">
-          Lizard
+        {props.title}
         </Typography>
         <Typography variant="body2" color="text.secondary">
-          {props.title}
+          price: {props.price}
         </Typography>
         <Typography variant="body2" color="text.secondary">
           {props.price}

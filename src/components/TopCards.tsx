@@ -2,7 +2,6 @@ import * as React from "react";
 import ImageList from "@mui/material/ImageList";
 import ImageListItem from "@mui/material/ImageListItem";
 import ImageListItemBar from "@mui/material/ImageListItemBar";
-import ListSubheader from "@mui/material/ListSubheader";
 import IconButton from "@mui/material/IconButton";
 import InfoIcon from "@mui/icons-material/Info";
 import category from "../types/typeCategory";
@@ -18,7 +17,7 @@ export default function TitlebarImageList(data: data) {
   return (
     <ImageList sx={{ width: 500, height: 450 }}>
       <ImageListItem key="Subheader" cols={2}>
-      <Typography gutterBottom variant="h4" component="div">top 5 products</Typography>
+      <Typography gutterBottom variant="h4" component="div">top 5 categories</Typography>
       </ImageListItem>
       {data.data.map((item) => (
         <ImageListItem key={item.img}>
@@ -30,8 +29,8 @@ export default function TitlebarImageList(data: data) {
           />
           <ImageListItemBar
           onClick={() => navigate(`/Products/${item.category_id}`)}
-            title={item.img}
-            subtitle="gilad"
+            title={item.category_name}
+            subtitle=""
             actionIcon={
               <IconButton
                 sx={{ color: "rgba(255, 255, 255, 0.54)" }}

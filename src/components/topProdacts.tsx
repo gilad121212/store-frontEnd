@@ -26,7 +26,7 @@ export default function TopCategory() {
     return (
       <ImageList  sx={{ width: 500, height: 450 }}>
         <ImageListItem key="Subheader" cols={2}>
-        <Typography gutterBottom variant="h4" component="div">top 5 category</Typography>
+        <Typography gutterBottom variant="h4" component="div">top 5 products</Typography>
         </ImageListItem>
         {dataCard.data.map((item) => (
           <ImageListItem key={item.images[0]}>
@@ -38,8 +38,8 @@ export default function TopCategory() {
             />
             <ImageListItemBar
               onClick={() => navigate(`/Product/${item.id}`)}
-              title={item.images[0]}
-              subtitle="gilad"
+              title={item.title}
+              subtitle={`price :${item.price}`}
               actionIcon={
                 <IconButton
                   sx={{ color: "rgba(255, 255, 255, 0.54)" }}
