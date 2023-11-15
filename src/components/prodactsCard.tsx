@@ -25,6 +25,9 @@ export default function CardsProdact(props: props) {
         <Typography variant="body2" color="text.secondary">
           price: {props.price}
         </Typography>
+        <Typography variant="body2" color="text.secondary">
+          {props.price}
+        </Typography>
       </CardContent>
       <CardActions>
         <Button size="small">Share</Button>
