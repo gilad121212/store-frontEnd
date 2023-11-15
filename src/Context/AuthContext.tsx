@@ -8,6 +8,7 @@ interface AuthContextProps {
 interface User {
   email: string;
   token: string;
+  id: string;
 }
 
 export const AuthContext = createContext<AuthContextProps | undefined>(undefined);

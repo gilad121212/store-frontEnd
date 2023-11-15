@@ -62,10 +62,14 @@ export default function SignUp(props: SimpleDialogProps) {
             `HTTP error! Status: ${res.status}, Error: ${errorText}`
           );
         }
-        return res.text();
+        return res.json();
       })
       .then((data) => {
-        const userObject = { email: user.email, token: data };
+        const userObject = {
+          email: user.email,
+          token: data.token,
+          id: data.id,
+        };
         localStorage.setItem("user", JSON.stringify(userObject)),
           setIsAuthenticated ? userObject : null;
       })

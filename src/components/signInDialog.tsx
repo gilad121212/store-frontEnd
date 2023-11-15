@@ -22,9 +22,9 @@ export interface SignInDialogProps {
 
 export default function SignIn(props: SignInDialogProps) {
   const { onClose, open } = props;
-  const authContext = React.useContext(AuthContext)
-  const isAuthenticated = authContext?.isAuthenticated
-  const setIsAuthenticated = authContext?.setIsAuthenticated
+  const authContext = React.useContext(AuthContext);
+  const isAuthenticated = authContext?.isAuthenticated;
+  const setIsAuthenticated = authContext?.setIsAuthenticated;
 
   const handleClose = () => {
     onClose("");
@@ -33,14 +33,10 @@ export default function SignIn(props: SignInDialogProps) {
   const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     const data = new FormData(event.currentTarget);
-    console.log({
-      email: data.get("email"),
-      password: data.get("password"),
-    });
     const user = {
       email: data.get("email"),
       password: data.get("password"),
-    }
+    };
     fetch("http://127.0.0.1:3000/users/logIn", {
       method: "POST",
       body: JSON.stringify(user),
@@ -48,17 +44,27 @@ export default function SignIn(props: SignInDialogProps) {
         "Content-Type": "application/json",
       },
     })
-    .then(async (res) => {
-      if (!res.ok) {
-        const errorText = await res.text();
-        throw new Error(`HTTP error! Status: ${res.status}, Error: ${errorText}`);
-      }
-      return res.text();
-    })
-    .then((data) => {
-      const userObject = { email: user.email, token: data };
-      localStorage.setItem('user', JSON.stringify(userObject)), setIsAuthenticated?(userObject):null})
-    .catch((error) => console.error('Error:', error));
+      .then(async (res) => {
+        if (!res.ok) {
+          const errorText = await res.text();
+          throw new Error(
+            `HTTP error! Status: ${res.status}, Error: ${errorText}`
+          );
+        }
+        return res.json();
+      })
+      .then((data) => {
+        const userObject = {
+          email: user.email,
+          token: data.token,
+          id: data.id,
+        };
+        console.log(userObject);
+        localStorage.setItem("user", JSON.stringify(userObject)),
+          setIsAuthenticated ? userObject : null;
+      })
+      .catch((error) => console.error("Error:", error));
+    handleClose();
   };
 
   const defaultTheme = createTheme();
