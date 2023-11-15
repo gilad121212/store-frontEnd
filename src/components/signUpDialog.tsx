@@ -48,7 +48,7 @@ export default function SignUp(props: SimpleDialogProps) {
     event.preventDefault();
     const data = new FormData(event.currentTarget);
     if (!user?.email) return;
-    fetch("http://127.0.0.1:3000/users/signUp", {
+    fetch("http://127.0.0.1:3009/users/signUp", {
       method: "POST",
       body: JSON.stringify(user),
       headers: {
@@ -62,10 +62,14 @@ export default function SignUp(props: SimpleDialogProps) {
             `HTTP error! Status: ${res.status}, Error: ${errorText}`
           );
         }
-        return res.text();
+        return res.json();
       })
       .then((data) => {
-        const userObject = { email: user.email, token: data };
+        const userObject = {
+          email: user.email,
+          token: data.token,
+          id: data.id,
+        };
         localStorage.setItem("user", JSON.stringify(userObject)),
           setIsAuthenticated ? userObject : null;
       })
