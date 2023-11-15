@@ -31,4 +31,3 @@ export function CategoryData(props: UserContextProviderProps) {
     </UserContext.Provider>
   );
 }
-
