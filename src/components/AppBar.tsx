@@ -18,7 +18,7 @@ import SignIn from "./signInDialog";
 import Badge, { BadgeProps } from "@mui/material/Badge";
 import { styled } from "@mui/material/styles";
 import ShoppingCartIcon from "@mui/icons-material/ShoppingCart";
-
+import ShoppingCart from "./shoppingCart";
 const pages = ["Home page", "Shopping Cart"];
 
 function ResponsiveAppBar() {
@@ -219,6 +219,7 @@ function ResponsiveAppBar() {
           </Toolbar>
         </Container>
       </AppBar>
+      <ShoppingCart/>
       <Outlet />
     </div>
   );

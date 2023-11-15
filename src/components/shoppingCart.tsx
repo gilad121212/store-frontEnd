@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import {
   AppBar,
   Toolbar,
@@ -18,8 +18,7 @@ import {
 } from "@mui/material";
 import ShoppingCartIcon from "@mui/icons-material/ShoppingCart";
 import DeleteIcon from "@mui/icons-material/Delete";
-import BottomNavigationAction from '@mui/material/BottomNavigationAction';
-
+import BottomNavigationAction from "@mui/material/BottomNavigationAction";
 
 interface CartItem {
   id: number;
@@ -32,129 +31,26 @@ interface CartItem {
 
 export default function ShoppingCart() {
   const [isDrawerOpen, setDrawerOpen] = useState(false);
-  const [cartItems, setCartItems] = useState<CartItem[]>([
-    {
-      id: 1,
-      name: "מוצר 1",
-      price: 20,
-      quantity: 1,
-      image: "https://placekitten.com/100/100",
-      description: "זהו מוצר נהדר שלנו!",
-    },
-    {
-      id: 2,
-      name: "מוצר 2",
-      price: 30,
-      quantity: 2,
-      image: "https://placekitten.com/120/120",
-      description: "מוצר מדהים במחיר משתלם!",
-    },
-    {
-      id: 3,
-      name: "מוצר 3",
-      price: 15,
-      quantity: 3,
-      image: "https://placekitten.com/80/80",
-      description: "המוצר הזול ביותר באתר!",
-    },
-    {
-      id: 4,
-      name: "מוצר 4",
-      price: 25,
-      quantity: 1,
-      image: "https://placekitten.com/110/110",
-      description: "עיצוב מהמם ומותג אמין!",
-    },
-    {
-      id: 5,
-      name: "מוצר 5",
-      price: 40,
-      quantity: 2,
-      image: "https://placekitten.com/90/90",
-      description: "המוצר היוקרתי ביותר בחנות!",
-    },
-    {
-      id: 6,
-      name: "מוצר 6",
-      price: 18,
-      quantity: 2,
-      image: "https://placekitten.com/95/95",
-      description: "מוצר עם תכונות מתקדמות!",
-    },
-    {
-      id: 7,
-      name: "מוצר 7",
-      price: 35,
-      quantity: 1,
-      image: "https://placekitten.com/105/105",
-      description: "עיצוב מיוחד ומותג יוקרתי!",
-    },
-    {
-      id: 8,
-      name: "מוצר 8",
-      price: 22,
-      quantity: 3,
-      image: "https://placekitten.com/85/85",
-      description: "מוצר פופולרי במיוחד!",
-    },
-    {
-      id: 9,
-      name: "מוצר 9",
-      price: 28,
-      quantity: 1,
-      image: "https://placekitten.com/115/115",
-      description: "מוצר בינוני במחיר נוח!",
-    },
-    {
-      id: 10,
-      name: "מוצר 10",
-      price: 45,
-      quantity: 2,
-      image: "https://placekitten.com/75/75",
-      description: "המוצר המתקדם ביותר בקטגוריה!",
-    },
-    {
-      id: 11,
-      name: "מוצר 11",
-      price: 15,
-      quantity: 2,
-      image: "https://placekitten.com/125/125",
-      description: "מוצר במחיר זול ואיכותי!",
-    },
-    {
-      id: 12,
-      name: "מוצר 12",
-      price: 32,
-      quantity: 1,
-      image: "https://placekitten.com/80/80",
-      description: "עיצוב ייחודי ומגוון צבעים!",
-    },
-    {
-      id: 13,
-      name: "מוצר 13",
-      price: 25,
-      quantity: 3,
-      image: "https://placekitten.com/110/110",
-      description: "מוצר פופולרי עם המון ביקורות חיוביות!",
-    },
-    {
-      id: 14,
-      name: "מוצר 14",
-      price: 40,
-      quantity: 1,
-      image: "https://placekitten.com/100/100",
-      description: "המוצר המפואר ביותר בחנות!",
-    },
-    {
-      id: 15,
-      name: "מוצר 15",
-      price: 20,
-      quantity: 2,
-      image: "https://placekitten.com/90/90",
-      description: "מוצר במחיר אטרקטיבי ואיכותי!",
-    },
-  ]);
+  const [cartItems, setCartItems] = useState<CartItem[] | null>(null);
+  useEffect(() => {
+    var myHeaders = new Headers();
+    myHeaders.append("Content-Type", "application/json");
+    var raw = JSON.stringify({
+      user_id: "6551ecae1026f74928c28106"
+    });
 
+    var requestOptions = {
+      method: "POST",
+      headers: myHeaders,
+      body: raw,
+      redirect: "follow",
+    };
+    fetch(`http://127.0.0.1:3000/products/getCart`, requestOptions)
+      .then((response) => response.json())
+      .then((result) => {
+        setCartItems(result)})
+      .catch((error) => console.log("error", error));
+  }, []);
   const handleDrawerOpen = () => {
     setDrawerOpen(true);
   };
@@ -179,16 +75,16 @@ export default function ShoppingCart() {
     setCartItems([]);
   };
 
-  const total = cartItems.reduce(
-    (acc, item) => acc + item.price * item.quantity,
-    0
-  );
+  // const total = cartItems.reduce(
+  //   (acc, item) => acc + item.price * item.quantity,
+  //   0
+  // );
 
   return (
     <div>
       <Toolbar>
         <IconButton edge="start" color="inherit" onClick={handleDrawerOpen}>
-          <Badge badgeContent={cartItems.length} color="secondary">
+          <Badge badgeContent={cartItems?.length} color="secondary">
             <ShoppingCartIcon />
           </Badge>
         </IconButton>
@@ -216,7 +112,7 @@ export default function ShoppingCart() {
           </List>
           <Divider />
           <List>
-            {cartItems.map((item) => (
+            {cartItems?.map((item) => (
               <ListItem key={item.id}>
                 <Card>
                   <div>
@@ -256,13 +152,13 @@ export default function ShoppingCart() {
             ))}
           </List>
           <Divider />
-          <Toolbar sx={{ zIndex: 'tooltip' }}>
+          <Toolbar sx={{ zIndex: "tooltip" }}>
             <Button variant="contained" color="primary">
               pay
             </Button>
             <List>
               <ListItem>
-                <ListItemText primary={`סכום כולל: ₪${total}`} />
+                <ListItemText primary={`סכום כולל: ₪${"total"}`} />
               </ListItem>
             </List>
           </Toolbar>
