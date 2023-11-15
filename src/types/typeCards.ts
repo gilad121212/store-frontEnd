@@ -3,7 +3,7 @@ type cards = {
     id: number;
     title: string;
     price: number;
-    description: number;
+    description: string;
     images: [string, string, string];
     creationAt: string;
     updatedAt: string;

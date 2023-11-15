@@ -29,6 +29,7 @@ export default function Products() {
             img={arr.images[0]}
             id={arr.id}
             title={arr.title}
+            price={arr.price}
           ></CardsProdact>
         ))}
       </Box>

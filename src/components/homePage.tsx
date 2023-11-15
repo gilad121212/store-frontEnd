@@ -5,6 +5,7 @@ import Box from "@mui/material/Box";
 import TopCategory from "./topProdacts";
 import TopProdact from "./TopCategorys";
 import TitlebarImageList from "./TopCards";
+import MapView from "./openLaiers";
 
 
 export default function HomePage() {
@@ -34,6 +35,7 @@ export default function HomePage() {
      <TopProdact></TopProdact>
       <TopCategory></TopCategory>
      </Box>
+     <MapView></MapView>
     </Box>
   );
 }
