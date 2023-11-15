@@ -15,18 +15,19 @@ import AdbIcon from "@mui/icons-material/Adb";
 import { Outlet } from "react-router-dom";
 import SignUp from "./signUpDialog";
 import SignIn from "./signInDialog";
-import Badge, { BadgeProps } from "@mui/material/Badge";
-import { styled } from "@mui/material/styles";
 import { useContext } from "react";
 import ShoppingCart from "./shoppingCart";
 import { AuthContext } from "../Context/AuthContext";
 
-const pages = ["Home page", "Shopping Cart"];
+const pages = ["Home page"];
 
 function ResponsiveAppBar() {
   const authContext = useContext(AuthContext);
-  const cartItems = authContext?.isAuthenticated;
+  const isAuthenticated = authContext?.isAuthenticated;
+  const setAuthenticated = authContext?.setIsAuthenticated;
+  console.log('auth:', authContext);
   
+
   const [anchorElNav, setAnchorElNav] = React.useState<null | HTMLElement>(
     null
   );
@@ -35,6 +36,7 @@ function ResponsiveAppBar() {
   );
 
   const [openSignUp, setOpenSignUp] = React.useState(false);
+  const [openMenu, setOpenMenu] = React.useState(true);
   const [selectedValueSignUp, setSelectedValueSignUp] = React.useState("");
   const [openSignIn, setOpenSignIn] = React.useState(false);
   const [selectedValueSignIn, setSelectedValueSignIn] = React.useState("");
@@ -69,14 +71,12 @@ function ResponsiveAppBar() {
     setAnchorElUser(null);
   };
 
-  const StyledBadge = styled(Badge)<BadgeProps>(({ theme }) => ({
-    "& .MuiBadge-badge": {
-      right: -3,
-      top: 13,
-      border: `2px solid ${theme.palette.background.paper}`,
-      padding: "0 4px",
-    },
-  }));
+  const handleLogOut = () => {
+    setAuthenticated && setAuthenticated(() => {
+        return null;
+      });
+    localStorage.removeItem("user");    
+  };
 
   return (
     <div>
@@ -99,8 +99,11 @@ function ResponsiveAppBar() {
                 textDecoration: "none",
               }}
             >
-              LOGO
+              STORE
             </Typography>
+            {isAuthenticated && (
+              <div>{isAuthenticated.email}</div>
+            )}
             <Box sx={{ flexGrow: 1, display: { xs: "flex", md: "none" } }}>
               <IconButton
                 size="large"
@@ -168,7 +171,7 @@ function ResponsiveAppBar() {
               ))}
               <Button>
                 <IconButton aria-label="cart">
-                  <ShoppingCart/>
+                  <ShoppingCart />
                 </IconButton>
               </Button>
             </Box>
@@ -178,44 +181,59 @@ function ResponsiveAppBar() {
                   <Avatar alt="Remy Sharp" src="/static/images/avatar/2.jpg" />
                 </IconButton>
               </Tooltip>
-              <Menu
-                sx={{ mt: "45px" }}
-                id="menu-appbar"
-                anchorEl={anchorElUser}
-                anchorOrigin={{
-                  vertical: "top",
-                  horizontal: "right",
-                }}
-                keepMounted
-                transformOrigin={{
-                  vertical: "top",
-                  horizontal: "right",
-                }}
-                open={Boolean(anchorElUser)}
-                onClose={handleCloseUserMenu}
-              >
-                <MenuItem key={"sign up"} onClick={handleClickOpenSignUpDialog}>
-                  <Typography textAlign="center">{"Sign up"}</Typography>
-                </MenuItem>
-                <SignUp
-                  selectedValue={selectedValueSignUp}
-                  open={openSignUp}
-                  onClose={handleCloseSignUp}
-                  handleClickOpenSignIn={handleClickOpenSignInDialog}
-                />
-                <MenuItem key={"sign in"} onClick={handleClickOpenSignInDialog}>
-                  <Typography textAlign="center">{"Sign in"}</Typography>
-                </MenuItem>
-                <SignIn
-                  selectedValue={selectedValueSignIn}
-                  open={openSignIn}
-                  onClose={handleCloseSignIn}
-                  handleClickOpenSignUp={handleClickOpenSignUpDialog}
-                />
-                <MenuItem key={"Log out"}>
-                  <Typography textAlign="center">{"Log out"}</Typography>
-                </MenuItem>
-              </Menu>
+              {openMenu && (
+                <Menu
+                  sx={{ mt: "45px" }}
+                  id="menu-appbar"
+                  anchorEl={anchorElUser}
+                  anchorOrigin={{
+                    vertical: "top",
+                    horizontal: "right",
+                  }}
+                  keepMounted
+                  transformOrigin={{
+                    vertical: "top",
+                    horizontal: "right",
+                  }}
+                  open={Boolean(anchorElUser)}
+                  onClose={handleCloseUserMenu}
+                >
+                  {!isAuthenticated && (
+                    <>
+                      <MenuItem
+                        key={"sign up"}
+                        onClick={handleClickOpenSignUpDialog}
+                      >
+                        <Typography textAlign="center">{"Sign up"}</Typography>
+                      </MenuItem>
+                      <SignUp
+                        selectedValue={selectedValueSignUp}
+                        open={openSignUp}
+                        onClose={handleCloseSignUp}
+                        handleClickOpenSignIn={handleClickOpenSignInDialog}
+                      />
+                      <MenuItem
+                        key={"sign in"}
+                        onClick={handleClickOpenSignInDialog}
+                      >
+                        <Typography textAlign="center">{"Sign in"}</Typography>
+                      </MenuItem>
+                      <SignIn
+                        selectedValue={selectedValueSignIn}
+                        open={openSignIn}
+                        onClose={handleCloseSignIn}
+                        handleClickOpenSignUp={handleClickOpenSignUpDialog}
+                      />
+                    </>
+                  )}
+
+                  {isAuthenticated && (
+                    <MenuItem onClick={handleLogOut} key={"Log out"}>
+                      <Typography textAlign="center">{"Log out"}</Typography>
+                    </MenuItem>
+                  )}
+                </Menu>
+              )}
             </Box>
           </Toolbar>
         </Container>
