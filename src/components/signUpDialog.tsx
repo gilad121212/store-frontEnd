@@ -48,7 +48,7 @@ export default function SignUp(props: SimpleDialogProps) {
     event.preventDefault();
     const data = new FormData(event.currentTarget);
     if (!user?.email) return;
-    fetch("http://127.0.0.1:3000/users/signUp", {
+    fetch("http://127.0.0.1:3009/users/signUp", {
       method: "POST",
       body: JSON.stringify(user),
       headers: {

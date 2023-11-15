@@ -55,7 +55,7 @@ export default function ShoppingCart() {
     if (!user) {
       return;
     }
-    fetch(`http://127.0.0.1:3000/products/getCart`, requestOptions)
+    fetch(`http://127.0.0.1:3009/products/getCart`, requestOptions)
       .then(async (res) => {
         if (!res.ok) {
           const errorText = await res.text();
@@ -117,7 +117,7 @@ export default function ShoppingCart() {
       redirect: "follow" as RequestRedirect,
     };
 
-    fetch("http://127.0.0.1:3000/products/editCart", requestOptions)
+    fetch("http://127.0.0.1:3009/products/editCart", requestOptions)
       .then((response) => response.text())
       .then((result) => console.log(result))
       .catch((error) => console.log("error", error));
