@@ -126,13 +126,15 @@ export default function ShoppingCart() {
     <div>
       <Toolbar>
         <IconButton edge="start" color="inherit" onClick={handleDrawerOpen}>
-          <Badge badgeContent={cartItems?.length} color="secondary">
+          <Badge badgeContent={cartItems?.length} color="error">
             <ShoppingCartIcon />
           </Badge>
         </IconButton>
-        <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
-          SHOPPING CART
-        </Typography>
+        <Typography
+          variant="h6"
+          component="div"
+          sx={{ flexGrow: 1 }}
+        ></Typography>
       </Toolbar>
       <Drawer anchor="right" open={isDrawerOpen} onClose={handleDrawerClose}>
         <div>
@@ -159,7 +161,9 @@ export default function ShoppingCart() {
               </List>
               <Divider />
             </div>
-          ) : (<p>empty cart</p>)}
+          ) : (
+            <p>empty cart</p>
+          )}
 
           <List>
             {cartItems &&
@@ -209,7 +213,7 @@ export default function ShoppingCart() {
           <Divider />
           <Toolbar sx={{ zIndex: "tooltip" }}>
             <Button variant="contained" color="primary">
-              pay
+              PAY
             </Button>
             <List>
               <ListItem>

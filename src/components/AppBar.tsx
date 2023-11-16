@@ -17,10 +17,9 @@ import SignUp from "./signUpDialog";
 import SignIn from "./signInDialog";
 import Badge, { BadgeProps } from "@mui/material/Badge";
 import { styled } from "@mui/material/styles";
-import ShoppingCartIcon from "@mui/icons-material/ShoppingCart";
 import ShoppingCart from "./shoppingCart";
 
-const pages = ["Home page", "Shopping Cart"];
+const pages = ["Home page"];
 
 function ResponsiveAppBar() {
   const [anchorElNav, setAnchorElNav] = React.useState<null | HTMLElement>(
@@ -132,6 +131,9 @@ function ResponsiveAppBar() {
                     <Typography textAlign="left">{page}</Typography>
                   </MenuItem>
                 ))}
+                <MenuItem key={"page"} onClick={handleCloseNavMenu}>
+                  <ShoppingCart></ShoppingCart>
+                </MenuItem>
               </Menu>
             </Box>
             <AdbIcon sx={{ display: { xs: "flex", md: "none" }, mr: 1 }} />
@@ -154,25 +156,15 @@ function ResponsiveAppBar() {
               LOGO
             </Typography>
             <Box sx={{ flexGrow: 1, display: { xs: "none", md: "flex" } }}>
-              {pages.map((page) => (
-                <Button
-                  key={page}
-                  onClick={handleCloseNavMenu}
-                  sx={{ my: 2, color: "white", display: "block" }}
-                >
-                  {page}
-                </Button>
-              ))}
-              <Button>
-                <IconButton aria-label="cart">
-                  <StyledBadge badgeContent={5} color="warning">
-                    <ShoppingCartIcon />
-                  </StyledBadge>
-                </IconButton>
-              </Button>
               <ShoppingCart></ShoppingCart>
+              <Button
+                key={"homePage"}
+                onClick={handleCloseNavMenu}
+                sx={{ my: 2, color: "white", display: "block" }}
+              >
+                {"HOME PAGE"}
+              </Button>
             </Box>
-
 
             <Box sx={{ flexGrow: 0 }}>
               <Tooltip title="Open settings">
