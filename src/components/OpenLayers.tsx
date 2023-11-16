@@ -20,11 +20,7 @@ export default function MapView() {
     [3926477.542699639, 3841800.948355723],
     [3879675.6960701123, 3775727.7263440946],
   ];
-  const arr = [
-    new Feature({
-      geometry: new Point([3869398.6029376243, 3635287.6222960353]),
-    }),
-  ];
+  const arr: Feature<Point>[] = [];
 
   useEffect(() => {
     const map = new Map({

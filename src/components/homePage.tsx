@@ -9,7 +9,7 @@ import MapView from "./OpenLayers";
 export default function HomePage() {
   const context = useContext(UserContext);
   if (!context) return null;
-  const { category, setCategory } = context;
+  const { category } = context;
 
   return (
     <Box>

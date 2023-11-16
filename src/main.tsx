@@ -5,7 +5,7 @@ import "./index.css";
 import Product from "./components/Product.tsx";
 import Products from "./components/Products.tsx";
 import Header from "./components/Header.tsx";
-import HomePage from "./components/homePage.tsx";
+import HomePage from "./components/HomePage.tsx";
 import { CategoryData } from "./Context/CategoryContext.tsx";
 
 const router = createBrowserRouter([

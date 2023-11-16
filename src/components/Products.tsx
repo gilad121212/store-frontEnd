@@ -2,12 +2,13 @@ import { useParams } from "react-router-dom";
 import React, { useState, useEffect } from "react";
 import CardsProdact from "./SortProdactsCard";
 import Box from "@mui/material/Box";
-import data from "../types/dataCards";
 import SortLine from "./SortLine";
 import Grid from "@mui/material/Grid";
 import "./Products.css";
 import TypeProducts from "../types/TypeProducts";
 import TypeProductsSort from "../types/TypeProductsSort";
+
+
 
 export default function Products() {
   const params = useParams();

@@ -11,8 +11,9 @@ export default function Product() {
         `http://localhost:3009/products/product/${params.id}`
       );
       const dataj = await data.json();
+      console.log("gilad")
       console.log(dataj);
-      setDataCard(dataj);
+      setDataCard(dataj.data);
     };
     data();
   }, []);
