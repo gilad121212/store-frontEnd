@@ -12,6 +12,7 @@ import Container from "@mui/material/Container";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
 import "./signInDialog.css";
 import { AuthContext } from "../Context/AuthContext";
+import { URL } from "../config";
 
 export interface SignInDialogProps {
   open: boolean;
@@ -35,7 +36,7 @@ export default function SignIn(props: SignInDialogProps) {
       email: data.get("email"),
       password: data.get("password"),
     };
-    fetch("http://127.0.0.1:3009/users/logIn", {
+    fetch(`${URL}/users/logIn`, {
       method: "POST",
       body: JSON.stringify(user),
       headers: {

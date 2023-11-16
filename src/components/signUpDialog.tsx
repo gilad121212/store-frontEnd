@@ -13,6 +13,7 @@ import { createTheme, ThemeProvider } from "@mui/material/styles";
 import "./signInDialog.css";
 import { useState } from "react";
 import { AuthContext } from "../Context/AuthContext";
+import { URL } from "../config";
 
 export interface SimpleDialogProps {
   open: boolean;
@@ -45,7 +46,7 @@ export default function SignUp(props: SimpleDialogProps) {
   const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     if (!user?.email) return;
-    fetch("http://127.0.0.1:3009/users/signUp", {
+    fetch(`${URL}/users/signUp`, {
       method: "POST",
       body: JSON.stringify(user),
       headers: {
