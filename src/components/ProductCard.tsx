@@ -72,7 +72,7 @@ export default function ImgMediaCard() {
 
   return (
     <div>
-      <Card sx={{ maxWidth: 900, marginTop: 5, marginLeft: 40 }}>
+      <Card sx={{ maxWidth: 900, marginTop: 4, marginLeft: 40 }}>
         <CardMedia
           component="img"
           alt="green iguana"
