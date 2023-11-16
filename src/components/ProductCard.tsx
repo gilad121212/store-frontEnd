@@ -9,6 +9,7 @@ import { useContext, useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import { CartItem } from "./shoppingCart";
 import {URL} from "../config"
+import Box from "@mui/material/Box";
 
 type Product = CartItem;
 
@@ -71,8 +72,8 @@ export default function ImgMediaCard() {
   }, []);
 
   return (
-    <div>
-      <Card sx={{ maxWidth: 900, marginTop: 4, marginLeft: 40 }}>
+    <Box sx={{widows:"100%", display:"flex",justifyContent:"center", alignItems:"center"}}>
+      <Card sx={{ maxWidth: 900, marginTop:4}}>
         <CardMedia
           component="img"
           alt="green iguana"
@@ -98,6 +99,6 @@ export default function ImgMediaCard() {
           </Button>
         </CardActions>
       </Card>
-    </div>
+    </Box>
   );
 }
