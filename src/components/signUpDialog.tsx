@@ -30,7 +30,6 @@ interface User {
 
 export default function SignUp(props: SimpleDialogProps) {
   const authContext = React.useContext(AuthContext);
-  const isAuthenticated = authContext?.isAuthenticated;
   const setIsAuthenticated = authContext?.setIsAuthenticated;
   const [user, setUser] = useState<User>({
     email: "",
@@ -39,14 +38,13 @@ export default function SignUp(props: SimpleDialogProps) {
     password: "",
   });
   const { onClose, selectedValue, open } = props;
-
+  const [massageError, setMassageError] = useState<string | null>(null)
   const handleClose = () => {
     onClose(selectedValue);
   };
 
   const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
-    const data = new FormData(event.currentTarget);
     if (!user?.email) return;
     fetch("http://127.0.0.1:3009/users/signUp", {
       method: "POST",
@@ -58,6 +56,7 @@ export default function SignUp(props: SimpleDialogProps) {
       .then(async (res) => {
         if (!res.ok) {
           const errorText = await res.text();
+          setMassageError(errorText)
           throw new Error(
             `HTTP error! Status: ${res.status}, Error: ${errorText}`
           );
@@ -71,11 +70,13 @@ export default function SignUp(props: SimpleDialogProps) {
           id: data.id,
         };
         localStorage.setItem("user", JSON.stringify(userObject)),
-          setIsAuthenticated ? userObject : null;
+        console.log(userObject);
+        setIsAuthenticated && setIsAuthenticated(userObject);
+        handleClose();
       })
-      .catch((error) => console.error("Error:", error));
+      .catch((error) => {console.log("Error:", error.message), setMassageError(error.message)})
 
-    handleClose();
+
     console.log(user);
 
     setUser({
@@ -187,6 +188,7 @@ export default function SignUp(props: SimpleDialogProps) {
               >
                 Sign Up
               </Button>
+              {massageError && (<div>{massageError}</div>)}
               <Grid container justifyContent="flex-end">
                 <Grid item>
                   <p id="BeyondSign" onClick={handleClickSignIn}>
