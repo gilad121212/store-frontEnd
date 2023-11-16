@@ -4,7 +4,7 @@ import ImageListItem from "@mui/material/ImageListItem";
 import ImageListItemBar from "@mui/material/ImageListItemBar";
 import IconButton from "@mui/material/IconButton";
 import InfoIcon from "@mui/icons-material/Info";
-import category from "../types/typeCategory";
+import category from "../types/Typecategore";
 import { useNavigate } from "react-router-dom";
 import Typography from "@mui/material/Typography";
 

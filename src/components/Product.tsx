@@ -1,29 +1,10 @@
 import { useParams } from "react-router-dom";
-import React, {  useState, useEffect } from "react";
-import ImgMediaCard from "./mainCard";
-
-type cards = {
-  _id: string;
-  id: number;
-  title: string;
-  price: number;
-  description: string;
-  images: [string, string, string];
-  creationAt: string;
-  updatedAt: string;
-  category: {
-    id: number;
-    name: string;
-    image: string;
-    creationAt: string;
-    updatedAt: string;
-  };
-  Stock: number;
-  Views: number;
-};
+import { useState, useEffect } from "react";
+import ImgMediaCard from "./ProductCard";
+import TypeProductsSort from "../types/TypeProductsSort";
 
 export default function Product() {
-  const [dataCard, setDataCard] = useState<cards | null>(null);
+  const [dataCard, setDataCard] = useState<TypeProductsSort | null>(null);
   useEffect(() => {
     const data = async () => {
       const data = await fetch(
@@ -39,13 +20,11 @@ export default function Product() {
   if (dataCard)
     return (
       <ImgMediaCard
-        description={dataCard.data.description}
-        key={dataCard.data.id}
-        price={dataCard.data.price}
-        img={dataCard.data.images[0]}
-        titel={dataCard.data.title}
-      >
-        {" "}
-      </ImgMediaCard>
+        key={dataCard.id}
+        img={dataCard.images[0]}
+        description={dataCard.description}
+        price={dataCard.price}
+        title={dataCard.title}
+      ></ImgMediaCard>
     );
 }

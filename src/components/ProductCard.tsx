@@ -4,16 +4,9 @@ import CardContent from "@mui/material/CardContent";
 import CardMedia from "@mui/material/CardMedia";
 import Button from "@mui/material/Button";
 import Typography from "@mui/material/Typography";
-import MapView from "./openLaiers";
+import TypeProductCard from "../types/TypeProductCard";
 
-type prop = {
-  img: string;
-  price: number;
-  titel: string;
-  description: string;
-};
-
-export default function ImgMediaCard(prop: prop) {
+export default function ImgMediaCard(prop: TypeProductCard) {
   return (
     <div>
       <Card sx={{ maxWidth: 900, marginTop: "50px", marginLeft: "200px" }}>
@@ -25,7 +18,7 @@ export default function ImgMediaCard(prop: prop) {
       />
       <CardContent>
         <Typography gutterBottom variant="h4" component="div">
-        {prop.titel}
+        {prop.title}
         </Typography>
         <Typography variant="h5" color="text.secondary" component="div">
           praice: {prop.price}
