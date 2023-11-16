@@ -1,7 +1,5 @@
 import  { useEffect, useState } from "react";
 import Typecategore from "../types/Typecategore";
-import process from "process";
-const URL = process.env.URL;
 
 const useFetch = () => {
   const [dataProduct, setPataProduct] = useState<Typecategore | null>(null);
