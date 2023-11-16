@@ -15,7 +15,6 @@ import AdbIcon from "@mui/icons-material/Adb";
 import { Outlet } from "react-router-dom";
 import SignUp from "./signUpDialog";
 import SignIn from "./signInDialog";
-import ShoppingCartIcon from "@mui/icons-material/ShoppingCart";
 import ShoppingCart from "./shoppingCart";
 import { AuthContext } from "../Context/AuthContext";
 
