@@ -1,17 +1,15 @@
-import RecipeReviewCard from "./categoryCards";
+import RecipeReviewCard from "./ProductsCards";
 import { useContext } from "react";
 import { UserContext } from "../Context/CategoryContext";
 import Box from "@mui/material/Box";
-import TopCategory from "./topProdacts";
-import TopProdact from "./TopCategorys";
-import TitlebarImageList from "./TopCards";
-import MapView from "./openLaiers";
-
+import TopCategory from "./Top5Products";
+import TopProdact from "./Top5Categories";
+import MapView from "./OpenLayers";
 
 export default function HomePage() {
   const context = useContext(UserContext);
   if (!context) return null;
-  const { category, setCategory } = context;
+  const { category } = context;
 
   return (
     <Box>
@@ -30,12 +28,19 @@ export default function HomePage() {
             name={arr.category_name}
           ></RecipeReviewCard>
         ))}
-      </Box >
-     <Box sx={{display:"flex", margin: "50px" ,justifyContent:"space-around" , alignItems:"center"}}>
-     <TopProdact></TopProdact>
-      <TopCategory></TopCategory>
-     </Box>
-     <MapView></MapView>
+      </Box>
+      <Box
+        sx={{
+          display: "flex",
+          margin: "50px",
+          justifyContent: "space-around",
+          alignItems: "center",
+        }}
+      >
+        <TopProdact></TopProdact>
+        <TopCategory></TopCategory>
+      </Box>
+      <MapView></MapView>
     </Box>
   );
 }
