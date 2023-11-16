@@ -1,23 +1,10 @@
 import { useParams } from "react-router-dom";
-import { useState, useEffect } from "react";
 import ImgMediaCard from "./ProductCard";
-import TypeProductsSort from "../types/TypeProductsSort";
+import { useProduct } from "../CustomHook/custom";
 
 export default function Product() {
-  const [dataCard, setDataCard] = useState<TypeProductsSort | null>(null);
-  useEffect(() => {
-    const data = async () => {
-      const data = await fetch(
-        `http://localhost:3009/products/product/${params.id}`
-      );
-      const dataj = await data.json();
-      console.log("gilad")
-      console.log(dataj);
-      setDataCard(dataj.data);
-    };
-    data();
-  }, []);
   const params = useParams();
+  const [dataCard] = useProduct(params)
   if (dataCard)
     return (
       <ImgMediaCard/>

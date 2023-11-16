@@ -3,22 +3,13 @@ import ImageListItem from "@mui/material/ImageListItem";
 import ImageListItemBar from "@mui/material/ImageListItemBar";
 import IconButton from "@mui/material/IconButton";
 import InfoIcon from "@mui/icons-material/Info";
-import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { Typography } from "@mui/material";
-import TypeProducts from "../types/TypeProducts";
+import { useTop5Products } from "../CustomHook/custom";
 
 export default function TopCategory() {
   const navigate = useNavigate();
-  const [dataCard, setDataCard] = useState<TypeProducts | null>(null);
-  useEffect(() => {
-    const data = async () => {
-      const data = await fetch(`http://localhost:3009/products/top5/products`);
-      const dataj = await data.json();
-      setDataCard(dataj);
-    };
-    data();
-  }, []);
+  const [dataCard] = useTop5Products()
   if (dataCard)
     return (
       <ImageList sx={{ width: 500, height: 450 }}>

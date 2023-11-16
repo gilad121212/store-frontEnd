@@ -53,7 +53,7 @@ export default function SignIn(props: SignInDialogProps) {
       })
       .then((data) => {
         const userObject = {
-          email: user.email,
+          email: user.email as string,
           token: data.token,
           id: data.id,
         };
@@ -115,6 +115,16 @@ export default function SignIn(props: SignInDialogProps) {
                 label="Password"
                 type="password"
                 id="password"
+                autoComplete="current-password"
+              />
+              <TextField
+                margin="normal"
+                required
+                fullWidth
+                name="confirmPassword"
+                label="Confirm Password"
+                type="confirmPassword"
+                id="confirmPassword"
                 autoComplete="current-password"
               />
 

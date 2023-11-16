@@ -13,7 +13,6 @@ import { createTheme, ThemeProvider } from "@mui/material/styles";
 import "./signInDialog.css";
 import { useState } from "react";
 import { AuthContext } from "../Context/AuthContext";
-import { json } from "react-router-dom";
 
 export interface SimpleDialogProps {
   open: boolean;
@@ -168,6 +167,16 @@ export default function SignUp(props: SimpleDialogProps) {
                     onChange={(e) =>
                       setUser({ ...user, ["password"]: e.target.value })
                     }
+                  />
+                  <TextField
+                    margin="normal"
+                    required
+                    fullWidth
+                    name="confirmPassword"
+                    label="Confirm Password"
+                    type="confirmPassword"
+                    id="confirmPassword"
+                    autoComplete="current-password"
                   />
                 </Grid>
                 <Grid item xs={12}></Grid>

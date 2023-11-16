@@ -15,18 +15,16 @@ import AdbIcon from "@mui/icons-material/Adb";
 import { Outlet } from "react-router-dom";
 import SignUp from "./signUpDialog";
 import SignIn from "./signInDialog";
-import { useContext } from "react";
 import ShoppingCart from "./shoppingCart";
 import { AuthContext } from "../Context/AuthContext";
 
 const pages = ["Home page"];
 
 function ResponsiveAppBar() {
-  const authContext = useContext(AuthContext);
+  const authContext = React.useContext(AuthContext);
   const isAuthenticated = authContext?.isAuthenticated;
   const setAuthenticated = authContext?.setIsAuthenticated;
-  console.log('auth:', authContext);
-  
+  console.log("auth:", authContext);
 
   const [anchorElNav, setAnchorElNav] = React.useState<null | HTMLElement>(
     null
@@ -36,7 +34,7 @@ function ResponsiveAppBar() {
   );
 
   const [openSignUp, setOpenSignUp] = React.useState(false);
-  const [openMenu, setOpenMenu] = React.useState(true);
+  const [openMenu] = React.useState(true);
   const [selectedValueSignUp, setSelectedValueSignUp] = React.useState("");
   const [openSignIn, setOpenSignIn] = React.useState(false);
   const [selectedValueSignIn, setSelectedValueSignIn] = React.useState("");
@@ -72,10 +70,11 @@ function ResponsiveAppBar() {
   };
 
   const handleLogOut = () => {
-    setAuthenticated && setAuthenticated(() => {
+    setAuthenticated &&
+      setAuthenticated(() => {
         return null;
       });
-    localStorage.removeItem("user");    
+    localStorage.removeItem("user");
   };
 
   return (
@@ -101,9 +100,7 @@ function ResponsiveAppBar() {
             >
               STORE
             </Typography>
-            {isAuthenticated && (
-              <div>{isAuthenticated.email}</div>
-            )}
+            {isAuthenticated && <div>{isAuthenticated.email}</div>}
             <Box sx={{ flexGrow: 1, display: { xs: "flex", md: "none" } }}>
               <IconButton
                 size="large"
@@ -138,6 +135,9 @@ function ResponsiveAppBar() {
                     <Typography textAlign="left">{page}</Typography>
                   </MenuItem>
                 ))}
+                <MenuItem key={"page"} onClick={handleCloseNavMenu}>
+                  <ShoppingCart></ShoppingCart>
+                </MenuItem>
               </Menu>
             </Box>
             <AdbIcon sx={{ display: { xs: "flex", md: "none" }, mr: 1 }} />
@@ -169,12 +169,20 @@ function ResponsiveAppBar() {
                   {page}
                 </Button>
               ))}
-              <Button>
-                <IconButton aria-label="cart">
-                  <ShoppingCart />
-                </IconButton>
+
+              <Button
+                key={"page"}
+                onClick={handleCloseNavMenu}
+                sx={{
+                  color: "white",
+                  display: "block",
+                  padding: "0 4px",
+                }}
+              >
+                <ShoppingCart />
               </Button>
             </Box>
+
             <Box sx={{ flexGrow: 0 }}>
               <Tooltip title="Open settings">
                 <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>

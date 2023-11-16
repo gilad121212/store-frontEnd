@@ -20,6 +20,11 @@ import "./shoppingCart.css";
 import { ShopingCartContext } from "../Context/ShopingCartContext";
 import { AuthContext } from "../Context/AuthContext";
 import Checkout from "./PayPal/PayPal";
+import { BadgeProps } from "@mui/material/Badge";
+import { styled } from "@mui/material/styles";
+import AddIcon from "@mui/icons-material/Add";
+import RemoveIcon from "@mui/icons-material/Remove";
+
 
 export interface CartItem {
   id: number;
@@ -154,20 +159,23 @@ export default function ShoppingCart() {
       })
       .catch((error) => console.log("error", error));
   };
+
+  const StyledBadge = styled(Badge)<BadgeProps>(({ theme }) => ({
+    "& .MuiBadge-badge": {
+      right: 0,
+      top: 0,
+      border: `2px solid ${theme.palette.background.paper}`,
+      padding: "0 4px",
+    },
+  }));
+  console.log(cartItems);
   return (
     <div>
-      <Toolbar>
-        <IconButton edge="start" color="inherit" onClick={handleDrawerOpen}>
-          <Badge badgeContent={cartItems?.length} color="secondary">
-            <ShoppingCartIcon />
-          </Badge>
-        </IconButton>
-        <Typography
-          variant="h6"
-          component="div"
-          sx={{ flexGrow: 1 }}
-        ></Typography>
-      </Toolbar>
+      <IconButton edge="start" color="inherit" onClick={handleDrawerOpen}>
+        <StyledBadge badgeContent={cartItems?.length} color="primary">
+          <ShoppingCartIcon />
+        </StyledBadge>
+      </IconButton>
       <Drawer anchor="right" open={isDrawerOpen} onClose={handleDrawerClose}>
         <div>
           <List>
@@ -196,7 +204,6 @@ export default function ShoppingCart() {
           ) : (
             <p>empty cart</p>
           )}
-
           <List>
             {cartItems &&
               cartItems.map((item) => (
@@ -212,31 +219,56 @@ export default function ShoppingCart() {
                       >
                         <DeleteIcon />
                       </IconButton>
-                      <div id="imageContainer">
-                        <CardMedia
-                          component="img"
-                          alt={item.name}
-                          width="400px"
-                          image={item.images[0]}
-                        />
-                      </div>
-                      <CardContent style={{ flex: 1 }}>
-                        <ListItemText
-                          primary={item.name}
-                          secondary={`₪${item.price} x ${item.quantity}`}
-                        />
-                        <Typography variant="body2" color="text.secondary">
-                          {item.description}
-                        </Typography>
-                        <TextField
-                          type="number"
-                          value={item.quantity}
-                          onChange={(e) =>
-                            handleQuantityChange(item.id, +e.target.value)
-                          }
-                          inputProps={{ min: 1 }}
-                        />
-                      </CardContent>
+                      <Toolbar>
+                        <div id="imageContainer">
+                          <CardMedia
+                            component="img"
+                            alt={item.name}
+                            width="400px"
+                            image={item.images[0]}
+                          />
+                        </div>
+                        <CardContent style={{ flex: 1 }}>
+                          <ListItemText primary={item.title} />
+                          <Typography
+                            variant="body2"
+                            color="text.secondary"
+                            sx={{ width: "230px" }}
+                          >
+                            {item.description}
+                          </Typography>
+                          <ListItemText
+                            secondary={`₪${item.price} x ${item.quantity}`}
+                          />
+                          <br />
+                          <TextField
+                            type="number"
+                            value={item.quantity}
+                            onChange={(e) =>
+                              handleQuantityChange(item.id, +e.target.value)
+                            }
+                            inputProps={{ min: 1 }}
+                            style={{ width: "60px", marginRight: "8px" }}
+                          />
+                          <IconButton
+                            size="small"
+                            onClick={() =>
+                              handleQuantityChange(item.id, item.quantity + 1)
+                            }
+                          >
+                            <AddIcon fontSize="small" />
+                          </IconButton>
+                          <IconButton
+                            size="small"
+                            onClick={() =>
+                              handleQuantityChange(item.id, item.quantity - 1)
+                            }
+                            disabled={item.quantity <= 1}
+                          >
+                            <RemoveIcon fontSize="small" />
+                          </IconButton>
+                        </CardContent>
+                      </Toolbar>
                     </div>
                   </Card>
                 </ListItem>
@@ -247,8 +279,8 @@ export default function ShoppingCart() {
             <List>
               <ListItem>
                 <div>
-                <ListItemText primary={`Total: ₪${total}`} />
-                  <Checkout amount={total} />
+                  <ListItemText primary={`Total: ₪${total}`} />
+                  <Checkout amount={total?total:0} />
                 </div>
               </ListItem>
             </List>
