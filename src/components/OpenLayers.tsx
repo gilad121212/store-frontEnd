@@ -3,6 +3,7 @@ import { Feature, Map, View } from "ol/index.js";
 import { OSM, Vector as VectorSource } from "ol/source.js";
 import { Point } from "ol/geom.js";
 import { Tile as TileLayer, Vector as VectorLayer } from "ol/layer.js";
+import Box from "@mui/material/Box";
 
 export default function MapView() {
   const mapRef = useRef(null);
@@ -47,8 +48,8 @@ export default function MapView() {
   }, []);
 
   return (
-    <div>
-      <div id="map" ref={mapRef}></div>
-    </div>
+   <Box sx={{widows:"100%",display:"flex", justifyContent:"center"}}>
+      <Box sx={{ width:500, height:700}} ref={mapRef}></Box>
+      </Box>
   );
 }
