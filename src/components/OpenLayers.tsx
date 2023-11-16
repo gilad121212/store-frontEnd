@@ -49,7 +49,7 @@ export default function MapView() {
 
   return (
    <Box sx={{widows:"100%",display:"flex", justifyContent:"center"}}>
-      <Box sx={{ width:500, height:700}} ref={mapRef}></Box>
+      <Box sx={{ width:300, height:300}} ref={mapRef}></Box>
       </Box>
   );
 }
