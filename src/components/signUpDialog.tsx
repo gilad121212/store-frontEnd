@@ -74,17 +74,9 @@ export default function SignUp(props: SimpleDialogProps) {
         setIsAuthenticated && setIsAuthenticated(userObject);
         handleClose();
       })
-      .catch((error) => {console.log("Error:", error.message), setMassageError(error.message)})
+      .catch((error) => {console.log("Error:", error.message), setMassageError(() => {return error.message})})
 
 
-    console.log(user);
-
-    setUser({
-      email: "",
-      firstName: "",
-      lastName: "",
-      password: "",
-    });
   };
 
   const defaultTheme = createTheme();
