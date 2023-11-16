@@ -5,11 +5,11 @@ import IconButton from "@mui/material/IconButton";
 import InfoIcon from "@mui/icons-material/Info";
 import { useNavigate } from "react-router-dom";
 import Typography from "@mui/material/Typography";
-import useFetch from "../coustemHocks/costem";
+import { useTop5Categories } from "../CustomHook/custom";
 
 export default function TopProdact() {
   const navigate = useNavigate();
-  const [dataProduct] =useFetch()
+  const [dataProduct] =useTop5Categories()
  
   if (dataProduct)
     return (

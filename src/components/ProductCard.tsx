@@ -8,6 +8,7 @@ import { ShopingCartContext } from "../Context/ShopingCartContext";
 import { useContext, useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import { CartItem } from "./shoppingCart";
+import {URL} from "../config"
 
 type Product = CartItem;
 
@@ -46,13 +47,13 @@ export default function ImgMediaCard() {
   useEffect(() => {
     const myHeaders = new Headers();
     myHeaders.append("Content-Type", "application/json");
-    var requestOptions = {
+    const requestOptions = {
       method: "GET",
       headers: myHeaders,
-      redirect: "follow",
+      redirect: 'follow' as RequestRedirect  
     };
 
-    fetch(`http://127.0.0.1:3009/products/product/${id}`, requestOptions)
+    fetch(`${URL}/products/product/${id}`, requestOptions)
       .then(async (res) => {
         if (!res.ok) {
           const errorText = await res.text();

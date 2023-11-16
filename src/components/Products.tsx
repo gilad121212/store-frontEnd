@@ -7,6 +7,7 @@ import Grid from "@mui/material/Grid";
 import "./Products.css";
 import TypeProducts from "../types/TypeProducts";
 import TypeProductsSort from "../types/TypeProductsSort";
+import {URL} from "../config"
 
 
 
@@ -20,7 +21,7 @@ export default function Products() {
     const fetchData = async () => {
       try {
         const response = await fetch(
-          `http://localhost:3009/products/all/${params.name}`
+          `${URL}/products/all/${params.name}`
         );
         if (!response.ok) {
           const errorText = await response.text();
