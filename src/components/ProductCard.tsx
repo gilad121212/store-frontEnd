@@ -96,7 +96,6 @@ export default function ImgMediaCard() {
           <Button onClick={handleAddToCart} size="small">
             add to shopping cart
           </Button>
-          <Button size="small">Learn More</Button>
         </CardActions>
       </Card>
     </div>

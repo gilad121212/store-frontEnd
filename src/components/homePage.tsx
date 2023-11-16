@@ -9,7 +9,7 @@ import MapView from "./OpenLayers";
 export default function HomePage() {
   const context = useContext(UserContext);
   if (!context) return null;
-  const { category } = context;
+  const { category, setCategory } = context;
 
   return (
     <Box>
@@ -19,6 +19,7 @@ export default function HomePage() {
           justifyContent: "center",
           alignItems: "center",
           marginTop: "100px",
+          flexFlow: "wrap"
         }}
       >
         {category?.map((arr) => (
@@ -35,6 +36,7 @@ export default function HomePage() {
           margin: "50px",
           justifyContent: "space-around",
           alignItems: "center",
+          flexFlow: "wrap"
         }}
       >
         <TopProdact></TopProdact>
