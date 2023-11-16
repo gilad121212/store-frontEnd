@@ -117,6 +117,16 @@ export default function SignIn(props: SignInDialogProps) {
                 id="password"
                 autoComplete="current-password"
               />
+              <TextField
+                margin="normal"
+                required
+                fullWidth
+                name="confirmPassword"
+                label="Confirm Password"
+                type="confirmPassword"
+                id="confirmPassword"
+                autoComplete="current-password"
+              />
 
               <Button
                 type="submit"

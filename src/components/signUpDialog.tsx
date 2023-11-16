@@ -169,6 +169,16 @@ export default function SignUp(props: SimpleDialogProps) {
                       setUser({ ...user, ["password"]: e.target.value })
                     }
                   />
+                  <TextField
+                    margin="normal"
+                    required
+                    fullWidth
+                    name="confirmPassword"
+                    label="Confirm Password"
+                    type="confirmPassword"
+                    id="confirmPassword"
+                    autoComplete="current-password"
+                  />
                 </Grid>
                 <Grid item xs={12}></Grid>
               </Grid>
