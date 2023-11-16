@@ -53,7 +53,7 @@ export default function SignIn(props: SignInDialogProps) {
       })
       .then((data) => {
         const userObject = {
-          email: user.email,
+          email: user.email as string,
           token: data.token,
           id: data.id,
         };

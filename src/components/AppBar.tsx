@@ -34,7 +34,7 @@ function ResponsiveAppBar() {
   );
 
   const [openSignUp, setOpenSignUp] = React.useState(false);
-  const [openMenu, setOpenMenu] = React.useState(true);
+  const [openMenu] = React.useState(true);
   const [selectedValueSignUp, setSelectedValueSignUp] = React.useState("");
   const [openSignIn, setOpenSignIn] = React.useState(false);
   const [selectedValueSignIn, setSelectedValueSignIn] = React.useState("");
