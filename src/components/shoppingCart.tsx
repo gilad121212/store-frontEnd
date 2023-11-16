@@ -280,7 +280,7 @@ export default function ShoppingCart() {
               <ListItem>
                 <div>
                   <ListItemText primary={`Total: ₪${total}`} />
-                  <Checkout amount={total} />
+                  <Checkout amount={total?total:0} />
                 </div>
               </ListItem>
             </List>
