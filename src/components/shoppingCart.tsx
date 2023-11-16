@@ -224,7 +224,6 @@ export default function ShoppingCart() {
                           <CardMedia
                             component="img"
                             alt={item.name}
-                            width="400px"
                             image={item.images[0]}
                           />
                         </Box>
@@ -233,7 +232,7 @@ export default function ShoppingCart() {
                           <Typography
                             variant="body2"
                             color="text.secondary"
-                            sx={{ width: "230px" }}
+                            sx={{ width:200 }}
                           >
                             {item.description}
                           </Typography>
@@ -248,7 +247,7 @@ export default function ShoppingCart() {
                               handleQuantityChange(item.id, +e.target.value)
                             }
                             inputProps={{ min: 1 }}
-                            style={{ width: "60px", marginRight: "8px" }}
+                            style={{ width: 50, marginRight: 2 }}
                           />
                           <IconButton
                             size="small"
