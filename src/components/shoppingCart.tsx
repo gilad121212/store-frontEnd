@@ -14,6 +14,7 @@ import {
   CardContent,
   CardMedia,
 } from "@mui/material";
+import Box from "@mui/material/Box";
 import ShoppingCartIcon from "@mui/icons-material/ShoppingCart";
 import DeleteIcon from "@mui/icons-material/Delete";
 import "./shoppingCart.css";
@@ -24,7 +25,6 @@ import { BadgeProps } from "@mui/material/Badge";
 import { styled } from "@mui/material/styles";
 import AddIcon from "@mui/icons-material/Add";
 import RemoveIcon from "@mui/icons-material/Remove";
-
 
 export interface CartItem {
   id: number;
@@ -220,14 +220,14 @@ export default function ShoppingCart() {
                         <DeleteIcon />
                       </IconButton>
                       <Toolbar>
-                        <div id="imageContainer">
+                        <Box sx={{ width: 250, margin: 2 }}>
                           <CardMedia
                             component="img"
                             alt={item.name}
                             width="400px"
                             image={item.images[0]}
                           />
-                        </div>
+                        </Box>
                         <CardContent style={{ flex: 1 }}>
                           <ListItemText primary={item.title} />
                           <Typography
@@ -280,7 +280,7 @@ export default function ShoppingCart() {
               <ListItem>
                 <div>
                   <ListItemText primary={`Total: ₪${total}`} />
-                  <Checkout amount={total?total:0} />
+                  <Checkout amount={total ? total : 0} />
                 </div>
               </ListItem>
             </List>
