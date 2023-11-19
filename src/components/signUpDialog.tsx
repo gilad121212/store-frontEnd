@@ -38,7 +38,7 @@ export default function SignUp(props: SimpleDialogProps) {
     password: "",
   });
   const { onClose, selectedValue, open } = props;
-  const [massageError, setMassageError] = useState<string | null>(null)
+  const [massageError, setMassageError] = useState<string | null>(null);
   const handleClose = () => {
     onClose(selectedValue);
   };
@@ -56,7 +56,7 @@ export default function SignUp(props: SimpleDialogProps) {
       .then(async (res) => {
         if (!res.ok) {
           const errorText = await res.text();
-          setMassageError(errorText)
+          setMassageError(errorText);
           throw new Error(
             `HTTP error! Status: ${res.status}, Error: ${errorText}`
           );
@@ -70,13 +70,16 @@ export default function SignUp(props: SimpleDialogProps) {
           id: data.id,
         };
         localStorage.setItem("user", JSON.stringify(userObject)),
-        console.log(userObject);
+          console.log(userObject);
         setIsAuthenticated && setIsAuthenticated(userObject);
         handleClose();
       })
-      .catch((error) => {console.log("Error:", error.message), setMassageError(() => {return error.message})})
-
-
+      .catch((error) => {
+        console.log("Error:", error.message),
+          setMassageError(() => {
+            return error.message;
+          });
+      });
   };
 
   const defaultTheme = createTheme();
@@ -190,7 +193,7 @@ export default function SignUp(props: SimpleDialogProps) {
               >
                 Sign Up
               </Button>
-              {massageError && (<div>{massageError}</div>)}
+              {massageError && <div>{massageError}</div>}
               <Grid container justifyContent="flex-end">
                 <Grid item>
                   <p id="BeyondSign" onClick={handleClickSignIn}>
