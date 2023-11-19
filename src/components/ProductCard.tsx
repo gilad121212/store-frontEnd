@@ -9,6 +9,7 @@ import { useContext, useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import { CartItem } from "./shoppingCart";
 import {URL} from "../config"
+import Box from "@mui/material/Box";
 
 type Product = CartItem;
 
@@ -69,14 +70,24 @@ export default function ImgMediaCard() {
       })
       .catch((error) => console.error("Error:", error));
   }, []);
+  function Comparison(){
+    const arrJ = localStorage.getItem("arr")
+    localStorage.removeItem("arr")
+    if(arrJ){
+    const arr = JSON.parse(arrJ)
+    console.log(arr)
+    if(product)
+    arr.push({id:product.id , img:product.images[0],price:product.price,title:product.title})
+    localStorage.setItem("arr", JSON.stringify(arr))}
+  }
 
   return (
-    <div>
-      <Card sx={{ maxWidth: 900, marginTop: "50px", marginLeft: "200px" }}>
+    <Box sx={{widows:"100%", display:"flex",justifyContent:"center", alignItems:"center"}}>
+      <Card sx={{ maxWidth: 900, marginTop:4}}>
         <CardMedia
           component="img"
           alt="green iguana"
-          height="400"
+          height="350"
           image={product?.images[0]}
         />
         {product && (
@@ -96,8 +107,10 @@ export default function ImgMediaCard() {
           <Button onClick={handleAddToCart} size="small">
             add to shopping cart
           </Button>
+          <Button 
+          onClick={Comparison}>Comparison</Button>
         </CardActions>
       </Card>
-    </div>
+    </Box>
   );
 }

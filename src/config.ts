@@ -1,1 +1,1 @@
-export const URL = "http://127.0.0.1:3009"
+export const URL = "https://store-service-zj5t.onrender.com"

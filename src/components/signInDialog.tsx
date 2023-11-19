@@ -11,8 +11,8 @@ import Typography from "@mui/material/Typography";
 import Container from "@mui/material/Container";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
 import "./signInDialog.css";
-import { AuthContext } from "../../Context/AuthContext";
-import { URL } from "../../config";
+import { AuthContext } from "../Context/AuthContext";
+import { URL } from "../config";
 
 export interface SignInDialogProps {
   open: boolean;

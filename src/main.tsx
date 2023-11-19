@@ -9,6 +9,7 @@ import HomePage from "./components/homePage.tsx";
 import { CategoryData } from "./Context/CategoryContext.tsx";
 import { CartProvider } from "./Context/ShopingCartContext.tsx";
 import { AuthProvider } from "./Context/AuthContext.tsx";
+import Comparison from "./components/Comparison.tsx";
 const router = createBrowserRouter([
   {
     path: "/",
@@ -25,6 +26,10 @@ const router = createBrowserRouter([
       {
         path: "/Product/:id",
         element: <Product />,
+      },
+      {
+        path: "/Comparison",
+        element: <Comparison />,
       },
     ],
   },
