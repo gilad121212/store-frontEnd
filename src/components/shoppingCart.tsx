@@ -25,7 +25,7 @@ import { BadgeProps } from "@mui/material/Badge";
 import { styled } from "@mui/material/styles";
 import AddIcon from "@mui/icons-material/Add";
 import RemoveIcon from "@mui/icons-material/Remove";
-
+import { URL } from "../config";
 export interface CartItem {
   id: number;
   name: string;
@@ -75,7 +75,7 @@ export default function ShoppingCart() {
       return;
     }
     localStorage.removeItem("cart");
-    fetch(`http://127.0.0.1:3009/products/getCart`, requestOptions)
+    fetch(`${URL}/products/getCart`, requestOptions)
       .then(async (res) => {
         if (!res.ok) {
           const errorText = await res.text();
@@ -149,7 +149,7 @@ export default function ShoppingCart() {
       body: raw,
       redirect: "follow" as RequestRedirect,
     };
-    fetch("http://127.0.0.1:3009/products/editCart", requestOptions)
+    fetch(`${URL}/products/editCart`, requestOptions)
       .then(async (res) => {
         if (!res.ok) {
           const errorText = await res.text();

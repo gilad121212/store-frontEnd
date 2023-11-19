@@ -10,7 +10,7 @@ import LockOutlinedIcon from "@mui/icons-material/LockOutlined";
 import Typography from "@mui/material/Typography";
 import Container from "@mui/material/Container";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
-import "../logIn/signInDialog.css";
+import "./signInDialog.css";
 import { useState } from "react";
 import { AuthContext } from "../Context/AuthContext";
 import { URL } from "../config";
