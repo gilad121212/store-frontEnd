@@ -59,7 +59,9 @@ export default function ShoppingCart() {
     const user: User | null = userString ? JSON.parse(userString) : null;
     const myHeaders = new Headers();
     myHeaders.append("Content-Type", "application/json");
-
+    if (user && user.token) {      
+      myHeaders.append("Authorization", user.token)
+    }
     const raw = JSON.stringify({
       user_id: user?.id,
     });
@@ -131,6 +133,9 @@ export default function ShoppingCart() {
     const user: User | null = userString ? JSON.parse(userString) : null;
     const myHeaders = new Headers();
     myHeaders.append("Content-Type", "application/json");
+    if (user && user.token) {
+      myHeaders.append("Authorization", user.token)
+    }
     const raw = JSON.stringify({
       products: cartItems,
       user_id: user?.id,

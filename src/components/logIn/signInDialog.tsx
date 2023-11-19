@@ -11,8 +11,8 @@ import Typography from "@mui/material/Typography";
 import Container from "@mui/material/Container";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
 import "./signInDialog.css";
-import { AuthContext } from "../Context/AuthContext";
-import { URL } from "../config";
+import { AuthContext } from "../../Context/AuthContext";
+import { URL } from "../../config";
 
 export interface SignInDialogProps {
   open: boolean;
@@ -28,7 +28,7 @@ export default function SignIn(props: SignInDialogProps) {
   const handleClose = () => {
     onClose("");
   };
-  const [massageError, setMassageError] = React.useState<string | null>(null)
+  const [massageError, setMassageError] = React.useState<string | null>(null);
   const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     const data = new FormData(event.currentTarget);
@@ -60,10 +60,12 @@ export default function SignIn(props: SignInDialogProps) {
         };
         console.log(userObject);
         localStorage.setItem("user", JSON.stringify(userObject)),
-        setIsAuthenticated && setIsAuthenticated(userObject);
+          setIsAuthenticated && setIsAuthenticated(userObject);
         handleClose();
       })
-      .catch((error) => {console.log("Error:", error.message), setMassageError(error.message)})
+      .catch((error) => {
+        console.log("Error:", error.message), setMassageError(error.message);
+      });
   };
 
   const defaultTheme = createTheme();
@@ -137,7 +139,7 @@ export default function SignIn(props: SignInDialogProps) {
               >
                 Sign In
               </Button>
-              {massageError && (<div>{massageError}</div>)}
+              {massageError && <div>{massageError}</div>}
               <Grid container>
                 <Grid item xs></Grid>
                 <Grid item>

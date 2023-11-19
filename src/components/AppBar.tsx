@@ -13,12 +13,11 @@ import Tooltip from "@mui/material/Tooltip";
 import MenuItem from "@mui/material/MenuItem";
 import AdbIcon from "@mui/icons-material/Adb";
 import { Outlet } from "react-router-dom";
-import SignUp from "./signUpDialog";
-import SignIn from "./signInDialog";
+import SignUp from "./signUp/signUpDialog";
+import SignIn from "./logIn/signInDialog";
 import ShoppingCart from "./shoppingCart";
 import { AuthContext } from "../Context/AuthContext";
 import { useNavigate } from "react-router-dom";
-
 
 const pages = ["Home page"];
 
@@ -77,7 +76,8 @@ function ResponsiveAppBar() {
         return null;
       });
     localStorage.removeItem("user");
-  };  const navigate = useNavigate();
+  };
+  const navigate = useNavigate();
 
   return (
     <div>
@@ -133,7 +133,7 @@ function ResponsiveAppBar() {
                 }}
               >
                 {pages.map((page) => (
-                  <MenuItem  >
+                  <MenuItem>
                     <Typography textAlign="left">{page}</Typography>
                   </MenuItem>
                 ))}
@@ -165,7 +165,7 @@ function ResponsiveAppBar() {
               {pages.map((page) => (
                 <Button
                   key={page}
-                  onClick={()=>navigate(`/`)}
+                  onClick={() => navigate(`/`)}
                   sx={{ my: 2, color: "white", display: "block" }}
                 >
                   {page}
