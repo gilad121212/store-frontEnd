@@ -19,7 +19,6 @@ import ShoppingCart from "./shoppingCart";
 import { AuthContext } from "../Context/AuthContext";
 import { useNavigate } from "react-router-dom";
 
-
 const pages = ["Home page"];
 
 function ResponsiveAppBar() {
@@ -77,7 +76,8 @@ function ResponsiveAppBar() {
         return null;
       });
     localStorage.removeItem("user");
-  };  const navigate = useNavigate();
+  };
+  const navigate = useNavigate();
 
   return (
     <div>
@@ -132,11 +132,13 @@ function ResponsiveAppBar() {
                   display: { xs: "block", md: "none" },
                 }}
               >
-                {pages.map((page) => (
-                  <MenuItem  >
-                    <Typography textAlign="left">{page}</Typography>
-                  </MenuItem>
-                ))}
+                <MenuItem onClick={() => navigate(`/`)}>
+                  <Typography textAlign="left">HOME PAGE</Typography>
+                </MenuItem>
+                <MenuItem onClick={() => navigate(`/Comparison`)}>
+                  <Typography textAlign="left">Comparison</Typography>
+                </MenuItem>
+
                 <MenuItem key={"page"} onClick={handleCloseNavMenu}>
                   <ShoppingCart></ShoppingCart>
                 </MenuItem>
@@ -162,15 +164,20 @@ function ResponsiveAppBar() {
               LOGO
             </Typography>
             <Box sx={{ flexGrow: 1, display: { xs: "none", md: "flex" } }}>
-              {pages.map((page) => (
-                <Button
-                  key={page}
-                  onClick={()=>navigate(`/`)}
-                  sx={{ my: 2, color: "white", display: "block" }}
-                >
-                  {page}
-                </Button>
-              ))}
+              <Button
+                key="home Page"
+                onClick={() => navigate(`/`)}
+                sx={{ my: 2, color: "white", display: "block" }}
+              >
+                home Page
+              </Button>
+              <Button
+                key="Comparison"
+                onClick={() => navigate(`/Comparison`)}
+                sx={{ my: 2, color: "white", display: "block" }}
+              >
+                Comparison
+              </Button>
 
               <Button
                 key={"page"}

@@ -19,6 +19,9 @@ export const UserContext = createContext<UserContextType | null>(null);
 export function CategoryData(props: UserContextProviderProps) {
   const [category, setCategory] = useState<category[] | null>(null);
   useEffect(() => {
+    const Comparison = localStorage.getItem("arr")
+    if(!Comparison)
+    localStorage.setItem("arr", JSON.stringify([]))
     const data = async () => {
       let data = await fetch(`${URL}/products/`);
       let jdata = await data.json();
